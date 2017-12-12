@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="350.5000000000001" y="388.5">IBullet</node>
+    <node x="260.0" y="1074.0">MazeRunnerNormalState</node>
+    <node x="544.0000000000001" y="711.0">DynamiteBomb</node>
+    <node x="1632.0" y="711.0">EndGate</node>
+    <node x="1152.0" y="1247.0">Difficulty</node>
+    <node x="2214.9930555555557" y="184.0">IMazeRunner</node>
+    <node x="0.0" y="1247.0">IBombFactory</node>
+    <node x="816.0000000000001" y="711.0">AmmoGift</node>
+    <node x="820.0" y="1026.0">RoundsMazeBuilder</node>
+    <node x="1836.9930555555557" y="388.5">IGate</node>
+    <node x="389.0" y="1247.0">IGiftFactory</node>
+    <node x="272.0000000000001" y="699.0">GunBullet</node>
+    <node x="135.11805555555566" y="24.0">Movable</node>
+    <node x="1360.0" y="687.0">WoodWall</node>
+    <node x="389.0" y="1377.0">RandomGiftFactory</node>
+    <node x="1235.9930555555557" y="364.5">IWall</node>
+    <node x="1137.0" y="896.0">IMonsterFactory</node>
+    <node x="1063.0" y="0.0">IMazeElement</node>
+    <node x="0.0" y="1074.0">MazeRunnerPoisionedState</node>
+    <node x="1088.0" y="687.0">UnbreakableWall</node>
+    <node x="674.0" y="896.0">IMazeBuilder</node>
+    <node x="1942.9930555555557" y="352.5">EmptyElementI</node>
+    <node x="1904.0" y="711.0">StartGate</node>
+    <node x="622.5000000000001" y="388.5">IBomb</node>
+    <node x="0.0" y="1377.0">RandomBombFactory</node>
+    <node x="1137.0" y="1026.0">RandomMonsterFactory</node>
+    <node x="149.25" y="896.0">IMazeRunnerState</node>
+    <node x="26.0" y="364.5">IMonster</node>
+    <node x="0.0" y="675.0">VampireMonster</node>
+    <node x="528.0" y="1026.0">EndlessMazeBuilder</node>
+    <node x="748.0" y="1247.0">Maze</node>
+    <node x="902.0" y="388.5">IGift</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="EndlessMazeBuilder" target="IMazeBuilder">
+      <point x="0.0" y="-40.0" />
+      <point x="664.0" y="1001.0" />
+      <point x="742.0" y="1001.0" />
+      <point x="-68.0" y="40.0" />
+    </edge>
+    <edge source="IMazeRunner" target="IMazeElement">
+      <point x="0.0" y="-220.5" />
+      <point x="2363.4930555555557" y="134.0" />
+      <point x="1299.25" y="134.0" />
+      <point x="110.25" y="52.0" />
+    </edge>
+    <edge source="RandomMonsterFactory" target="IMonsterFactory">
+      <point x="0.0" y="-40.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="RandomBombFactory" target="IBombFactory">
+      <point x="0.0" y="-40.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="IBullet" target="IMazeElement">
+      <point x="23.75" y="-16.0" />
+      <point x="421.7500000000001" y="144.0" />
+      <point x="1110.25" y="144.0" />
+      <point x="-78.75" y="52.0" />
+    </edge>
+    <edge source="MazeRunnerNormalState" target="IMazeRunnerState">
+      <point x="0.0" y="-64.0" />
+      <point x="371.5" y="1049.0" />
+      <point x="294.0" y="1049.0" />
+      <point x="48.25" y="64.0" />
+    </edge>
+    <edge source="WoodWall" target="IWall">
+      <point x="0.0" y="-76.0" />
+      <point x="1486.0" y="650.0" />
+      <point x="1385.9930555555557" y="650.0" />
+      <point x="50.0" y="40.0" />
+    </edge>
+    <edge source="GunBullet" target="IBullet">
+      <point x="0.0" y="-64.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="IMonster" target="IMazeElement">
+      <point x="50.0" y="-40.0" />
+      <point x="176.0" y="134.0" />
+      <point x="1078.75" y="134.0" />
+      <point x="-110.25" y="52.0" />
+    </edge>
+    <edge source="EmptyElementI" target="IMazeElement">
+      <point x="0.0" y="-52.0" />
+      <point x="2068.9930555555557" y="144.0" />
+      <point x="1267.75" y="144.0" />
+      <point x="78.75" y="52.0" />
+    </edge>
+    <edge source="AmmoGift" target="IGift">
+      <point x="-1.1368683772161603E-13" y="-52.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="UnbreakableWall" target="IWall">
+      <point x="0.0" y="-76.0" />
+      <point x="1214.0" y="650.0" />
+      <point x="1285.9930555555557" y="650.0" />
+      <point x="-50.0" y="40.0" />
+    </edge>
+    <edge source="RoundsMazeBuilder" target="IMazeBuilder">
+      <point x="0.0" y="-40.0" />
+      <point x="956.0" y="1001.0" />
+      <point x="878.0" y="1001.0" />
+      <point x="68.0" y="40.0" />
+    </edge>
+    <edge source="IBullet" target="Movable">
+      <point x="-23.75" y="-16.0" />
+      <point x="374.2500000000001" y="124.0" />
+      <point x="249.11805555555566" y="124.0" />
+      <point x="38.0" y="28.0" />
+    </edge>
+    <edge source="EndGate" target="IGate">
+      <point x="0.0" y="-52.0" />
+      <point x="1758.0" y="650.0" />
+      <point x="1858.4930555555557" y="650.0" />
+      <point x="-21.5" y="16.0" />
+    </edge>
+    <edge source="VampireMonster" target="IMonster">
+      <point x="0.0" y="-88.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="IBomb" target="IMazeElement">
+      <point x="0.0" y="-16.0" />
+      <point x="670.0000000000001" y="154.0" />
+      <point x="1141.75" y="154.0" />
+      <point x="-47.25" y="52.0" />
+    </edge>
+    <edge source="DynamiteBomb" target="IBomb">
+      <point x="0.0" y="-52.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="RandomGiftFactory" target="IGiftFactory">
+      <point x="0.0" y="-40.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="IMonster" target="Movable">
+      <point x="-50.0" y="-40.0" />
+      <point x="76.0" y="124.0" />
+      <point x="173.11805555555566" y="124.0" />
+      <point x="-38.0" y="28.0" />
+    </edge>
+    <edge source="IGift" target="IMazeElement">
+      <point x="0.0" y="-16.0" />
+      <point x="942.0" y="164.0" />
+      <point x="1173.25" y="164.0" />
+      <point x="-15.75" y="52.0" />
+    </edge>
+    <edge source="MazeRunnerPoisionedState" target="IMazeRunnerState">
+      <point x="0.0" y="-64.0" />
+      <point x="120.0" y="1049.0" />
+      <point x="197.5" y="1049.0" />
+      <point x="-48.25" y="64.0" />
+    </edge>
+    <edge source="IGate" target="IMazeElement">
+      <point x="0.0" y="-16.0" />
+      <point x="1879.9930555555557" y="154.0" />
+      <point x="1236.25" y="154.0" />
+      <point x="47.25" y="52.0" />
+    </edge>
+    <edge source="StartGate" target="IGate">
+      <point x="0.0" y="-52.0" />
+      <point x="2030.0" y="650.0" />
+      <point x="1901.4930555555557" y="650.0" />
+      <point x="21.5" y="16.0" />
+    </edge>
+    <edge source="IWall" target="IMazeElement">
+      <point x="0.0" y="-40.0" />
+      <point x="1335.9930555555557" y="164.0" />
+      <point x="1204.75" y="164.0" />
+      <point x="15.75" y="52.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4" x="1365.25" y="768.5" />
+  <SelectedNodes>
+    <node>UnbreakableWall</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
