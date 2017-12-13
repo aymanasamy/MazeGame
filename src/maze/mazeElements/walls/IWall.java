@@ -1,8 +1,9 @@
 package maze.mazeElements.walls;
 
 import maze.IMazeElement;
+import maze.mazeElements.Healthable;
 
-public interface IWall extends IMazeElement {
+public interface IWall extends IMazeElement, Healthable {
     static int getInitialHealth() {
         return 1;
     }

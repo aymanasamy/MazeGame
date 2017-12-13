@@ -2,6 +2,7 @@ package maze;
 
 import maze.helpingclasses.PointCompare;
 import maze.mazeElements.EmptyElement;
+import maze.mazeElements.monsters.IMonster;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -69,7 +70,6 @@ public class Maze {
     private boolean elementIsNotInTheMaze(Point position, IMazeElement element) {
         return isNotInTheMaze(position) || isNotInTheMaze(new Point(position.x + element.getWidth(),position.y + element.getHeight()));
     }
-
     public Point getPosition(IMazeElement element) {
         // Add all the points that have this element
         ArrayList<Point> points = new ArrayList<>();

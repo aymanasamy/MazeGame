@@ -1,7 +1,8 @@
 package maze.mazeElements.bullets;
 
-import maze.mazeElements.monsters.IMonster;
+import maze.Maze;
+import maze.mazeElements.Direction;
 
 public interface IBulletsFactory {
-    public IBullet generate(int damage);
+    IBullet generate(int damage, Maze maze, Direction direction);
 }

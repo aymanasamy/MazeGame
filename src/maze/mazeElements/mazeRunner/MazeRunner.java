@@ -1,72 +1,135 @@
 package maze.mazeElements.mazeRunner;
 
 import maze.IMazeElement;
+import maze.Maze;
+import maze.mazeElements.Direction;
+import maze.mazeElements.Healthable;
+import maze.mazeElements.bombs.IBomb;
+import maze.mazeElements.bullets.BulletFactory;
+import maze.mazeElements.bullets.IBulletsFactory;
+import maze.mazeElements.gifts.IGift;
+import maze.mazeElements.monsters.IMonster;
 
-public class MazeRunner implements IMazeElement {
+public class MazeRunner implements IMazeElement, Healthable {
+    private int health;
+    private int lives;
+    private int bullets;
+    private Maze maze;
+    private Direction direction;
     private IMazeRunnerState state;
 
-    void moveRight() {
+    private final int initialLives = 3;
+    private final int initialHealth = 10;
+    private final int initialBullets = 6;
+    private final Direction initialDirection = Direction.Up;
+    private final int bulletDamage = 1;
+
+    private final int width = 1;
+    private final int height = 1;
+
+    public MazeRunner(IMazeRunnerState state,Maze maze){
+        this.state = state;
+        this.maze = maze;
+        this.lives = initialLives;
+        this.bullets = initialBullets;
+        this.health = initialHealth;
+        this.direction = initialDirection;
+    }
+    public void moveRight() {
         state.moveRight();
     }
 
-    void moveLeft() {
+    public void moveLeft() {
         state.moveLeft();
     }
 
-    void moveUp() {
+    public void moveUp() {
         state.moveUp();
     }
 
-    void moveDown() {
+    public void moveDown() {
         state.moveDown();
     }
 
-    int getHealth() {
-        return 0;
+    public int getHealth() {
+        return health;
     }
 
-    void setHealth(int health) {
-
+    public void setHealth(int health) {
+        if(health <= 0)
+            setLives(getLives()-1);
+        else
+            this.health = health;
     }
 
-    void setLives(int lives) {
-
+    public void setLives(int lives) {
+        if(lives <= 0)
+            this.lives = 0;
+        else
+            this.lives = lives;
     }
 
-    int getLives() {
-        return 0;
+    public int getLives() {
+        return lives;
     }
 
-    int getBullets() {
-        return 0;
+    public int getBullets() {
+        return bullets;
     }
 
-    void setBullets(int bullets) {
+    public void setBullets(int bullets) {
+        if(bullets <= 0)
+            this.bullets = 0;
+        else
+            this.bullets = bullets;
     }
 
-    IMazeRunnerState getState() {
+    public IMazeRunnerState getState() {
         return state;
     }
 
-    void setState(IMazeRunnerState state) {
+    public void setState(IMazeRunnerState state) {
         this.state = state;
     }
 
     @Override
     public int getWidth() {
-        return 1;
+        return width;
     }
 
     @Override
     public int getHeight() {
-        return 1;
+        return height;
     }
 
     @Override
     public void affect(IMazeElement element) {
-
+        if(element instanceof IMonster) {
+            ((IMonster) element).setHealth(0);
+            maze.removeElement(element);
+        }
+        else if(element instanceof IBomb)
+            maze.removeElement(element);
+        else if(element instanceof IGift)
+            maze.removeElement(element);
     }
 
     public void fire() {
+        if(bullets <= 0)
+            return;
+        IBulletsFactory bulletsFactory = BulletFactory.getInstance();
+        bulletsFactory.generate(bulletDamage,maze,direction);
+    }
+
+    public Maze getMaze() {
+        return maze;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 }
