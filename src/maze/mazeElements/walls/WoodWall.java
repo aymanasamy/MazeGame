@@ -1,5 +1,7 @@
 package maze.mazeElements.walls;
 
+import maze.IMazeElement;
+
 public class WoodWall implements IWall {
     static int getInitialHealth() {
         return 1;

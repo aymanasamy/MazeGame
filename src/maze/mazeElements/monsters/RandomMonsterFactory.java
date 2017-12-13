@@ -1,8 +1,9 @@
 package maze.mazeElements.monsters;
 
 public class RandomMonsterFactory implements IMonsterFactory {
+
     @Override
-    public IMonster generate() {
+    public IMonster generate(int initialHealth) {
         return null;
     }
 

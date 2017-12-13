@@ -2,7 +2,7 @@ package maze.mazeElements.mazeRunner;
 
 import maze.IMazeElement;
 
-public class IMazeRunner implements IMazeElement {
+public class MazeRunner implements IMazeElement {
     private IMazeRunnerState state;
 
     void moveRight() {
@@ -54,12 +54,12 @@ public class IMazeRunner implements IMazeElement {
 
     @Override
     public int getWidth() {
-        return 0;
+        return 1;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return 1;
     }
 
     @Override
