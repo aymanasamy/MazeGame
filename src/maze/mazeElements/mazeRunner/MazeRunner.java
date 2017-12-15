@@ -18,14 +18,14 @@ public class MazeRunner implements IMazeElement, Healthable {
     private Direction direction;
     private IMazeRunnerState state;
 
-    private final int initialLives = 3;
-    private final int initialHealth = 10;
-    private final int initialBullets = 6;
-    private final Direction initialDirection = Direction.Up;
-    private final int bulletDamage = 1;
+    private final static int initialLives = 3;
+    private final static int initialHealth = 10;
+    private final static int initialBullets = 6;
+    private final static Direction initialDirection = Direction.Up;
+    private final static int bulletDamage = 1;
 
-    private final int width = 1;
-    private final int height = 1;
+    private final static int width = 1;
+    private final static int height = 1;
 
     public MazeRunner(IMazeRunnerState state,Maze maze){
         this.state = state;

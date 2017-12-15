@@ -3,6 +3,9 @@ package maze.mazeElements.walls;
 import maze.IMazeElement;
 
 public class UnbreakableWall implements IWall {
+    private static int width = 1;
+    private static int height = 1;
+
     static int getInitialHealth() {
         return 0;
     }
@@ -16,17 +19,17 @@ public class UnbreakableWall implements IWall {
 
     @Override
     public void setHealth(int health) {
-
+        // Unbreakable, so leave health as it is
     }
 
     @Override
     public int getWidth() {
-        return 0;
+        return width;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return height;
     }
 
     @Override
