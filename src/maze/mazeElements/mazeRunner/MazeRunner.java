@@ -3,6 +3,7 @@ package maze.mazeElements.mazeRunner;
 import maze.IMazeElement;
 import maze.Maze;
 import maze.mazeElements.Direction;
+import maze.mazeElements.Directionable;
 import maze.mazeElements.Healthable;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.bullets.BulletFactory;
@@ -10,7 +11,7 @@ import maze.mazeElements.bullets.IBulletsFactory;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
 
-public class MazeRunner implements IMazeElement, Healthable {
+public class MazeRunner implements Healthable, Directionable {
     private int health;
     private int lives;
     private int bullets;
@@ -27,9 +28,8 @@ public class MazeRunner implements IMazeElement, Healthable {
     private final static int width = 1;
     private final static int height = 1;
 
-    public MazeRunner(IMazeRunnerState state,Maze maze){
-        this.state = state;
-        this.maze = maze;
+    public MazeRunner(){
+        this.state = new MazeRunnerNormalState(this);
         this.lives = initialLives;
         this.bullets = initialBullets;
         this.health = initialHealth;
@@ -103,6 +103,11 @@ public class MazeRunner implements IMazeElement, Healthable {
     }
 
     @Override
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+    }
+
+    @Override
     public void affect(IMazeElement element) {
         if(element instanceof IMonster) {
             ((IMonster) element).setHealth(0);
@@ -118,7 +123,7 @@ public class MazeRunner implements IMazeElement, Healthable {
         if(bullets <= 0)
             return;
         IBulletsFactory bulletsFactory = BulletFactory.getInstance();
-        bulletsFactory.generate(bulletDamage,maze,direction);
+        bulletsFactory.generate(maze,bulletDamage,direction);
     }
 
     public Maze getMaze() {

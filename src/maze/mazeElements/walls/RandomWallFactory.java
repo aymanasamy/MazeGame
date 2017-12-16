@@ -1,5 +1,7 @@
 package maze.mazeElements.walls;
 
+import maze.Maze;
+
 import java.util.*;
 
 public class RandomWallFactory implements IWallFactory {
@@ -20,7 +22,7 @@ public class RandomWallFactory implements IWallFactory {
     }
 
     @Override
-    public IWall generate(boolean isBreakable, int initialHealth) {
+    public IWall generate(Maze maze, boolean isBreakable, int initialHealth) {
         List<Class<? extends IWall>> wallClasses;
         if (isBreakable) {
             wallClasses = breakableWallClasses.get(initialHealth);
@@ -35,6 +37,7 @@ public class RandomWallFactory implements IWallFactory {
                 Class<? extends IWall> WallType = wallClasses.get(rand.nextInt(wallClasses.size()));
                 try {
                     generatedWall = WallType.newInstance();
+                    generatedWall.setMaze(maze);
                 } catch (InstantiationException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {

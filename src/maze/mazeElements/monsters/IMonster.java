@@ -4,7 +4,7 @@ import maze.IMazeElement;
 import maze.mazeElements.Healthable;
 import maze.mazeElements.Directionable;
 
-public interface IMonster extends IMazeElement, Directionable, Healthable {
+public interface IMonster extends Directionable, Healthable {
     static int getInitialHealth() {
         return 1;
     }

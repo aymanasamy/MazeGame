@@ -1,5 +1,7 @@
 package maze.mazeElements.bombs;
 
+import maze.Maze;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,13 +22,14 @@ public class RandomBombFactory implements IBombFactory {
     }
 
     @Override
-    public IBomb generate() {
+    public IBomb generate(Maze maze) {
         IBomb generatedBomb = null;
         if (!bombClasses.isEmpty()) {
             Random rand = new Random();
             Class<? extends IBomb> bombType = bombClasses.get(rand.nextInt(bombClasses.size()));
             try {
                 generatedBomb = bombType.newInstance();
+                generatedBomb.setMaze(maze);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

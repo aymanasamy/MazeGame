@@ -1,5 +1,7 @@
 package maze.mazeElements.monsters;
 
+import maze.Maze;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,13 +22,14 @@ public class RandomMonsterFactory implements IMonsterFactory {
     }
 
     @Override
-    public IMonster generate(int initialHealth) {
+    public IMonster generate(Maze maze, int initialHealth) {
         IMonster generatedMonster = null;
         if (!monsterClasses.isEmpty()) {
             Random rand = new Random();
             Class<? extends IMonster> MonsterType = monsterClasses.get(rand.nextInt(monsterClasses.size()));
             try {
                 generatedMonster = MonsterType.newInstance();
+                generatedMonster.setMaze(maze);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -35,7 +38,6 @@ public class RandomMonsterFactory implements IMonsterFactory {
         }
         return generatedMonster;
     }
-
     @Override
     public void addMonster(Class<? extends IMonster> monster) {
         monsterClasses.add(monster);

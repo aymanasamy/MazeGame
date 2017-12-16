@@ -1,11 +1,13 @@
 package maze.mazeElements.gates;
 
 import maze.IMazeElement;
+import maze.Maze;
 import maze.mazeElements.mazeRunner.MazeRunner;
 
 public class EndGate implements IGate {
     private static int width = 1;
     private static int height = 1;
+    private Maze maze;
     @Override
     public int getWidth() {
         return width;
@@ -17,8 +19,14 @@ public class EndGate implements IGate {
     }
 
     @Override
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+    }
+
+    @Override
     public void affect(IMazeElement element) {
         if (element instanceof MazeRunner) {
+            System.out.println("Mission Accomplished");
             // TODO: ((MazeRunner) element).getMaze().win();
         }
     }

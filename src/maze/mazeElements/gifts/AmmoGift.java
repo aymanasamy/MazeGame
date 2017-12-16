@@ -1,6 +1,7 @@
 package maze.mazeElements.gifts;
 
 import maze.IMazeElement;
+import maze.Maze;
 import maze.mazeElements.mazeRunner.MazeRunner;
 
 /**
@@ -9,6 +10,13 @@ import maze.mazeElements.mazeRunner.MazeRunner;
 public class AmmoGift implements IGift {
     private static final int width = 1;
     private static final int height = 1;
+    private static final int additinalAmmo = 2;
+    private Maze maze;
+
+    public void setMaze(Maze maze){
+        this.maze = maze;
+    }
+
     @Override
     public int getWidth() {
         return width;
@@ -23,7 +31,12 @@ public class AmmoGift implements IGift {
     public void affect(IMazeElement element) {
         if (element instanceof MazeRunner) {
             MazeRunner runner = (MazeRunner) element;
-            runner.setBullets(runner.getBullets() + 2);
+            runner.setBullets(runner.getBullets() + additinalAmmo);
         }
+    }
+
+    @Override
+    public void destroy() {
+        maze.removeElement(this);
     }
 }

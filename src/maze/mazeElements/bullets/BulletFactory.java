@@ -13,10 +13,14 @@ public class BulletFactory implements IBulletsFactory {
     private BulletFactory() { }
 
     @Override
-    public IBullet generate(int damage, Maze maze, Direction direction) {
+    public IBullet generate(Maze maze, int damage, Direction direction) {
+        IBullet bullet;
         if(damage == 1)
-            return new GunBullet(maze,direction);
+            bullet = new GunBullet();
         else
             return null;
+        bullet.setDirection(direction);
+        bullet.setMaze(maze);
+        return bullet;
     }
 }

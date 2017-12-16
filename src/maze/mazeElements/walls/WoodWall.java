@@ -15,10 +15,6 @@ public class WoodWall implements IWall {
         return true;
     }
 
-    public WoodWall(Maze m) {
-        maze = m;
-    }
-
     @Override
     public int getHealth() {
         return health;
@@ -41,6 +37,11 @@ public class WoodWall implements IWall {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public void setMaze(Maze maze) {
+        this.maze = maze;
     }
 
     @Override

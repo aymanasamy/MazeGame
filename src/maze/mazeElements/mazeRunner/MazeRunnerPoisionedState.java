@@ -1,9 +1,6 @@
 package maze.mazeElements.mazeRunner;
 
-import maze.Maze;
-import maze.mazeElements.Direction;
-
-import java.awt.*;
+import maze.mazeElements.DirectionableMover;
 
 public class MazeRunnerPoisionedState implements IMazeRunnerState {
     private MazeRunner mazeRunner;
@@ -12,20 +9,18 @@ public class MazeRunnerPoisionedState implements IMazeRunnerState {
     }
     @Override
     public void moveRight() {
-        MazeRunnerMover.moveLeft(mazeRunner);
+        DirectionableMover.moveLeft(mazeRunner);
     }
     @Override
-    public void moveLeft() {
-        MazeRunnerMover.moveRight(mazeRunner);
-    }
+    public void moveLeft() { DirectionableMover.moveRight(mazeRunner); }
 
     @Override
     public void moveUp() {
-        MazeRunnerMover.moveDown(mazeRunner);
+        DirectionableMover.moveDown(mazeRunner);
     }
 
     @Override
     public void moveDown() {
-        MazeRunnerMover.moveUp(mazeRunner);
+        DirectionableMover.moveUp(mazeRunner);
     }
 }

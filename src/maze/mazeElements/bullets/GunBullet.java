@@ -3,15 +3,17 @@ package maze.mazeElements.bullets;
 import maze.IMazeElement;
 import maze.Maze;
 import maze.mazeElements.Direction;
-import maze.mazeElements.Directionable;
+import maze.mazeElements.Healthable;
+import maze.mazeElements.Moveable;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.gifts.IGift;
+import maze.mazeElements.mazeRunner.MazeRunner;
 import maze.mazeElements.monsters.IMonster;
 import maze.mazeElements.walls.IWall;
 
 import java.awt.*;
 
-public class GunBullet implements IBullet, Directionable {
+public class GunBullet implements IBullet, Moveable {
 
     private final int width = 1;
     private final int height = 1;
@@ -20,14 +22,19 @@ public class GunBullet implements IBullet, Directionable {
     private Direction direction;
     private Maze maze;
 
-    public GunBullet(Maze maze,Direction direction) {
-        this.maze = maze;
-        this.direction = direction;
-    }
-
     @Override
     public int getDamage() {
         return damage;
+    }
+
+    @Override
+    public void destroy() {
+        maze.removeElement(this);
+    }
+
+    @Override
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
     @Override
@@ -41,11 +48,14 @@ public class GunBullet implements IBullet, Directionable {
     }
 
     @Override
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+    }
+
+    @Override
     public void affect(IMazeElement element) {
-        if(element instanceof IMonster)
-            ((IMonster) element).setHealth(((IMonster) element).getHealth()-damage);
-        else if(element instanceof IWall)
-            ((IWall) element).setHealth(((IWall) element).getHealth()-damage);
+        if(element instanceof Healthable)
+            ((Healthable) element).setHealth(((Healthable) element).getHealth()-damage);
         else if(element instanceof IBomb)
             maze.removeElement(element);
         else if(element instanceof IGift)

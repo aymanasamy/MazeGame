@@ -1,5 +1,7 @@
 package maze.mazeElements.gifts;
 
+import maze.Maze;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,13 +22,14 @@ public class RandomGiftFactory implements IGiftFactory {
     }
 
     @Override
-    public IGift generate() {
+    public IGift generate(Maze maze) {
         IGift generatedGift = null;
         if (!giftClasses.isEmpty()) {
             Random rand = new Random();
             Class<? extends IGift> GiftType = giftClasses.get(rand.nextInt(giftClasses.size()));
             try {
                 generatedGift = GiftType.newInstance();
+                generatedGift.setMaze(maze);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

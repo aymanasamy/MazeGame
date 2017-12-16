@@ -3,12 +3,14 @@ package maze.mazeElements.monsters;
 import maze.IMazeElement;
 import maze.Maze;
 import maze.mazeElements.Direction;
+import maze.mazeElements.DirectionableMover;
+import maze.mazeElements.Moveable;
 import maze.mazeElements.mazeRunner.MazeRunner;
 
 import java.awt.*;
 import java.util.Random;
 
-public class VampireMonster implements IMonster {
+public class VampireMonster implements IMonster, Moveable {
 
     private static final int width = 1;
     private static final int height = 1;
@@ -17,8 +19,7 @@ public class VampireMonster implements IMonster {
     private int health = getInitialHealth();
     private Maze maze;
 
-    public VampireMonster(Maze m) {
-        maze = m;
+    public VampireMonster() {
         direction = Direction.Up; // Initial direction
     }
 
@@ -51,6 +52,11 @@ public class VampireMonster implements IMonster {
     }
 
     @Override
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+    }
+
+    @Override
     public void affect(IMazeElement element) {
         if (element instanceof MazeRunner) {
             MazeRunner runner = (MazeRunner) element;
@@ -62,8 +68,7 @@ public class VampireMonster implements IMonster {
     public void move() {
         Random rand = new Random();
         Direction dir = Direction.values()[rand.nextInt(4)];
-
-        // TODO: MOVE MONSTER!
+        DirectionableMover.moveInDirection(this,dir);
     }
 
     @Override
@@ -74,5 +79,10 @@ public class VampireMonster implements IMonster {
     @Override
     public void setDirection(Direction dir) {
         direction = dir;
+    }
+
+    @Override
+    public Maze getMaze() {
+        return maze;
     }
 }

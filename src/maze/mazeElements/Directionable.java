@@ -1,6 +1,10 @@
 package maze.mazeElements;
 
-public interface Directionable {
+import maze.IMazeElement;
+import maze.Maze;
+
+public interface Directionable extends IMazeElement {
     Direction getDirection();
     void setDirection(Direction dir);
+    Maze getMaze();
 }
