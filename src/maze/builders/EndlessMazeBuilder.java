@@ -21,6 +21,7 @@ public class EndlessMazeBuilder implements IMazeBuilder {
 
 	@Override
 	public Maze generate(int level, Difficulty difficulty) {
+		
 		final int size = level * 3;
 		Stack<Point> myStack = new Stack();
 		MazeGenerationAlgorithm MyEndlessMazeinchractars = new MazeGenerationAlgorithm();

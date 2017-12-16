@@ -9,6 +9,7 @@ public class MazeGenerationAlgorithm {
 	public static Stack<Point> planb = new Stack();
 
 	private static char[][] maze;
+	
 	static boolean[][] visited;
 
 	public Stack<Point> GetmazeInStack(int width, int height) {
