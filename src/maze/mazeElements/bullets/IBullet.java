@@ -1,8 +1,8 @@
 package maze.mazeElements.bullets;
 
 import maze.IMazeElement;
-import maze.mazeElements.Movable;
+import maze.mazeElements.Directionable;
 
-public interface IBullet extends IMazeElement, Movable {
+public interface IBullet extends IMazeElement, Directionable {
     int getDamage();
 }

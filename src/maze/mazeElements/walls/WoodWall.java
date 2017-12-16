@@ -1,8 +1,10 @@
 package maze.mazeElements.walls;
 
 import maze.IMazeElement;
+import maze.Maze;
 
 public class WoodWall implements IWall {
+    private Maze maze;
     private static int width = 1;
     private static int height = 1;
     private int health = getInitialHealth();
@@ -12,6 +14,11 @@ public class WoodWall implements IWall {
     static boolean isBreakable() {
         return true;
     }
+
+    public WoodWall(Maze m) {
+        maze = m;
+    }
+
     @Override
     public int getHealth() {
         return health;
@@ -22,6 +29,7 @@ public class WoodWall implements IWall {
         this.health = health;
         if (this.health < 0) {
             this.health = 0;
+            maze.removeElement(this);
         }
     }
 

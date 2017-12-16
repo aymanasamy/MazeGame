@@ -3,7 +3,7 @@ package maze.mazeElements.bullets;
 import maze.IMazeElement;
 import maze.Maze;
 import maze.mazeElements.Direction;
-import maze.mazeElements.Movable;
+import maze.mazeElements.Directionable;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
@@ -11,7 +11,7 @@ import maze.mazeElements.walls.IWall;
 
 import java.awt.*;
 
-public class GunBullet implements IBullet, Movable {
+public class GunBullet implements IBullet, Directionable {
 
     private final int width = 1;
     private final int height = 1;

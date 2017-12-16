@@ -25,6 +25,7 @@ public class RandomWallFactory implements IWallFactory {
         if (isBreakable) {
             wallClasses = breakableWallClasses.get(initialHealth);
         } else {
+            initialHealth = 1;
             wallClasses = unbreakableWallClasses.get(initialHealth);
         }
         IWall generatedWall = null;
@@ -51,6 +52,7 @@ public class RandomWallFactory implements IWallFactory {
             wallClasses = breakableWallClasses;
         } else {
             wallClasses = unbreakableWallClasses;
+            initialHealth = 1;
         }
 
         if (wallClasses.get(initialHealth) == null) {

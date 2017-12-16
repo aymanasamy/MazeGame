@@ -7,14 +7,14 @@ public class UnbreakableWall implements IWall {
     private static int height = 1;
 
     static int getInitialHealth() {
-        return 0;
+        return 1;
     }
     static boolean isBreakable() {
         return false;
     }
     @Override
     public int getHealth() {
-        return 0;
+        return 1;
     }
 
     @Override

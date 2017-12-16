@@ -125,6 +125,8 @@ public class MazeRunner implements IMazeElement, Healthable {
         return maze;
     }
 
+
+
     public Direction getDirection() {
         return direction;
     }

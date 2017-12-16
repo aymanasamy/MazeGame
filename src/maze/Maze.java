@@ -47,6 +47,14 @@ public class Maze {
     public boolean setElement(Point position, IMazeElement element) {
         if(elementIsNotInTheMaze(position, element))
             return false;
+        // Affect all elements in this place
+        for(int i = position.x;i < position.x + element.getWidth();i++) {
+            for(int j = position.y;j < position.y + element.getHeight();j++) {
+                element.affect(map[i][j]);
+                map[i][j].affect(element);
+            }
+        }
+
         boolean hasFreeSpace = true;
         for(int i = position.x;i < position.x + element.getWidth();i++) {
             for(int j = position.y;j < position.y + element.getHeight();j++) {
@@ -59,6 +67,7 @@ public class Maze {
         if(!hasFreeSpace) {
             return false;
         }
+
         for(int i = position.x;i < position.x + element.getWidth();i++) {
             for(int j = position.y;j < position.y + element.getHeight();j++) {
                 map[i][j] = element;
