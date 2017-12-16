@@ -10,6 +10,7 @@ public class MazeGenerationAlgorithm {
 
 	private static char[][] maze;
 	
+	
 	static boolean[][] visited;
 
 	public Stack<Point> GetmazeInStack(int width, int height) {

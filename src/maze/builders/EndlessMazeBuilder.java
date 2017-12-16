@@ -19,6 +19,7 @@ import maze.mazeElements.walls.RandomWallFactory;
 
 public class EndlessMazeBuilder implements IMazeBuilder {
 
+	
 	@Override
 	public Maze generate(int level, Difficulty difficulty) {
 		
