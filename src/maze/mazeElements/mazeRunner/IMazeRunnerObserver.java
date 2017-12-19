@@ -2,7 +2,9 @@ package maze.mazeElements.mazeRunner;
 
 import maze.mazeElements.IDirectionalbeObserver;
 
-public interface IMazeRunnerObserver extends IDirectionalbeObserver {
+import java.io.Serializable;
+
+public interface IMazeRunnerObserver extends DirectionalbeObserver, Serializable{
     void fire();
     void destroy();
     void setHealth(int health);

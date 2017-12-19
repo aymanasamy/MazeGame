@@ -6,9 +6,11 @@ import maze.mazeElements.Direction;
 import maze.mazeElements.EmptyElement;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.bullets.BulletFactory;
+import maze.mazeElements.bullets.GunBullet;
 import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
+import maze.mazeElements.monsters.IMonsterObserver;
 import maze.mazeElements.monsters.IMonsterObserver;
 import maze.mazeElements.walls.IWall;
 import org.junit.Test;
@@ -112,6 +114,16 @@ public class GunBulletTester {
         private Maze maze;
 
         @Override
+        public int getInitialHealth() {
+            return 1;
+        }
+
+        @Override
+        public boolean isBreakable() {
+            return true;
+        }
+
+        @Override
         public int getHealth() {
             return health;
         }
@@ -198,6 +210,12 @@ public class GunBulletTester {
     }
     private class TestMonster implements IMonster{
         private int health;
+
+        @Override
+        public int getInitialHealth() {
+            return 1;
+        }
+
         @Override
         public int getHealth() {
             return health;
@@ -257,7 +275,7 @@ public class GunBulletTester {
 
         @Override
         public void notifyMoveIn(Direction dir) {
-
+            // TODO
         }
     }
 }

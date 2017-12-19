@@ -11,11 +11,12 @@ import maze.mazeElements.bullets.IBulletsFactory;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MazeRunner implements Healthable, Directionable {
+public class MazeRunner implements Healthable, Directionable, Serializable {
     private final static int initialLives = 3;
     private final static int initialHealth = 10;
     private final static int initialBullets = 6;

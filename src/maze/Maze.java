@@ -6,10 +6,11 @@ import maze.mazeElements.mazeRunner.MazeRunner;
 import maze.mazeElements.monsters.IMonster;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Maze {
+public class Maze implements Serializable {
     private int width;
     private int height;
     private IMazeElement[][] map;

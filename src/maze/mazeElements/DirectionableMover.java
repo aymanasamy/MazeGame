@@ -3,8 +3,9 @@ package maze.mazeElements;
 import maze.Maze;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class DirectionableMover {
+public class DirectionableMover implements Serializable {
 
     public static void moveRight(Directionable element) {
         if(element.getDirection().equals(Direction.Right)) {

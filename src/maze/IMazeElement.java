@@ -1,6 +1,8 @@
 package maze;
 
-public interface IMazeElement {
+import java.io.Serializable;
+
+public interface IMazeElement extends Serializable {
     public int getWidth();
 
     public int getHeight();
