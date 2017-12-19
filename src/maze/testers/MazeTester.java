@@ -75,16 +75,16 @@ public class MazeTester {
                 }
             }
         }
-        for(int i = 0;i < 9;i++) {
-            for (int j = 0; j < 9; j++) {
+        for(int i = 0;i < 10;i++) {
+            for (int j = 0; j < 10; j++) {
                 IMazeElement element = new TestMazeElement(1,1);
                 Point point = new Point(i,j);
                 assertTrue(maze.setElement(point,element));
                 assertEquals(element,maze.getElement(point));
             }
         }
-        for(int i = 9;i < 19;i++) {
-            for (int j = 9; j < 19; j++) {
+        for(int i = 10;i < 19;i++) {
+            for (int j = 10; j < 19; j++) {
                 assertFalse(maze.setElement(new Point(i,j),new TestMazeElement(1,1)));
             }
         }

@@ -6,10 +6,10 @@ import maze.mazeElements.Direction;
 import maze.mazeElements.EmptyElement;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.bullets.BulletFactory;
-import maze.mazeElements.bullets.GunBullet;
 import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
+import maze.mazeElements.monsters.IMonsterObserver;
 import maze.mazeElements.walls.IWall;
 import org.junit.Test;
 
@@ -209,6 +209,16 @@ public class GunBulletTester {
         }
 
         @Override
+        public void addObserver(IMonsterObserver observer) {
+
+        }
+
+        @Override
+        public void removeObserver(IMonsterObserver observer) {
+
+        }
+
+        @Override
         public int getWidth() {
             return 1;
         }
@@ -243,6 +253,11 @@ public class GunBulletTester {
         @Override
         public Maze getMaze() {
             return maze;
+        }
+
+        @Override
+        public void notifyMoveIn(Direction dir) {
+
         }
     }
 }
