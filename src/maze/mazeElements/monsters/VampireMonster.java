@@ -5,10 +5,8 @@ import maze.Maze;
 import maze.mazeElements.Direction;
 import maze.mazeElements.DirectionableMover;
 import maze.mazeElements.Moveable;
-import maze.mazeElements.mazeRunner.IMazeRunnerObserverI;
 import maze.mazeElements.mazeRunner.MazeRunner;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -125,7 +123,7 @@ public class VampireMonster implements IMonster, Moveable {
     public void notifyMoveIn(Direction dir) {
         Iterator<IMonsterObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
-            iterator.next().moveTo(dir);
+            iterator.next().moveIn(dir);
         }
     }
 }
