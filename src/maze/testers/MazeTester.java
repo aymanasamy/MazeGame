@@ -128,6 +128,13 @@ public class MazeTester {
         public int getHeight() {
             return height;
         }
+
+        private Maze maze;
+        @Override
+        public void setMaze(Maze maze) {
+            this.maze = maze;
+        }
+
         public TestMazeElement(int width,int height) {
             this.width = width;
             this.height = height;

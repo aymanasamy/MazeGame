@@ -9,6 +9,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Maze {
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     private int width;
     private int height;
     private IMazeElement[][] map;

@@ -5,7 +5,9 @@ import maze.Maze;
 import maze.mazeElements.Direction;
 import maze.mazeElements.EmptyElement;
 import maze.mazeElements.bombs.IBomb;
+import maze.mazeElements.bullets.BulletFactory;
 import maze.mazeElements.bullets.GunBullet;
+import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
 import maze.mazeElements.walls.IWall;
@@ -21,7 +23,7 @@ public class GunBulletTester {
     public void testMove() {
         // Up
         Maze maze = new Maze(10,10);
-        GunBullet bullet = new GunBullet(maze,Direction.Up);
+        IBullet bullet = BulletFactory.getInstance().generate(maze,1,Direction.Up);
         maze.setElement(new Point(5,5),bullet);
         assertEquals(new Point(5,5),maze.getPosition(bullet));
         bullet.move();
@@ -31,7 +33,7 @@ public class GunBulletTester {
 
         // Down
         maze = new Maze(10,10);
-        bullet = new GunBullet(maze,Direction.Down);
+        bullet = BulletFactory.getInstance().generate(maze,1,Direction.Down);
         maze.setElement(new Point(5,5),bullet);
         assertEquals(new Point(5,5),maze.getPosition(bullet));
         bullet.move();
@@ -41,7 +43,7 @@ public class GunBulletTester {
 
         // Right
         maze = new Maze(10,10);
-        bullet = new GunBullet(maze,Direction.Right);
+        bullet = BulletFactory.getInstance().generate(maze,1,Direction.Right);
         maze.setElement(new Point(5,5),bullet);
         assertEquals(new Point(5,5),maze.getPosition(bullet));
         bullet.move();
@@ -51,7 +53,7 @@ public class GunBulletTester {
 
         // Left
         maze = new Maze(10,10);
-        bullet = new GunBullet(maze,Direction.Left);
+        bullet = BulletFactory.getInstance().generate(maze,1,Direction.Left);
         maze.setElement(new Point(5,5),bullet);
         assertEquals(new Point(5,5),maze.getPosition(bullet));
         bullet.move();
@@ -64,7 +66,7 @@ public class GunBulletTester {
     public void testAffect() {
         // Wall
         Maze maze = new Maze(10,10);
-        GunBullet bullet = new GunBullet(maze,Direction.Up);
+        IBullet bullet = BulletFactory.getInstance().generate(maze,1,Direction.Up);
         IWall wall  = new TestWall();
         wall.setHealth(10);
         assertEquals(10,wall.getHealth());
@@ -75,7 +77,7 @@ public class GunBulletTester {
 
         // Gift
         maze = new Maze(10,10);
-        bullet = new GunBullet(maze,Direction.Up);
+        bullet = BulletFactory.getInstance().generate(maze,1,Direction.Up);
         IGift gift = new TestGift();
         Point position = new Point(0,0);
         maze.setElement(position,gift);
@@ -85,7 +87,7 @@ public class GunBulletTester {
 
         // Bomb
         maze = new Maze(10,10);
-        bullet = new GunBullet(maze,Direction.Up);
+        bullet = BulletFactory.getInstance().generate(maze,1,Direction.Up);
         IBomb bomb = new TestBomb();
         position = new Point(0,0);
         maze.setElement(position,bomb);
@@ -95,7 +97,7 @@ public class GunBulletTester {
 
         // Monster
         maze = new Maze(10,10);
-        bullet = new GunBullet(maze,Direction.Up);
+        bullet = BulletFactory.getInstance().generate(maze,1,Direction.Up);
         IMonster monster = new TestMonster();
         monster.setHealth(10);
         assertEquals(10,monster.getHealth());
@@ -107,6 +109,8 @@ public class GunBulletTester {
 
     private class TestWall implements IWall {
         private int health;
+        private Maze maze;
+
         @Override
         public int getHealth() {
             return health;
@@ -128,6 +132,11 @@ public class GunBulletTester {
         }
 
         @Override
+        public void setMaze(Maze maze) {
+            this.maze = maze;
+        }
+
+        @Override
         public void affect(IMazeElement element) {
 
         }
@@ -135,6 +144,11 @@ public class GunBulletTester {
 
     private class TestGift implements IGift{
 
+        private Maze maze;
+        @Override
+        public void setMaze(Maze maze) {
+            this.maze = maze;
+        }
         @Override
         public int getWidth() {
             return 1;
@@ -147,12 +161,21 @@ public class GunBulletTester {
 
         @Override
         public void affect(IMazeElement element) {
+
+        }
+
+        @Override
+        public void destroy() {
 
         }
     }
 
     private class TestBomb implements IBomb {
-
+        private Maze maze;
+        @Override
+        public void setMaze(Maze maze) {
+            this.maze = maze;
+        }
         @Override
         public int getWidth() {
             return 1;
@@ -165,6 +188,11 @@ public class GunBulletTester {
 
         @Override
         public void affect(IMazeElement element) {
+
+        }
+
+        @Override
+        public void destroy() {
 
         }
     }
@@ -190,14 +218,31 @@ public class GunBulletTester {
             return 1;
         }
 
+        private Maze maze;
+        @Override
+        public void setMaze(Maze maze) {
+            this.maze = maze;
+        }
+
         @Override
         public void affect(IMazeElement element) {
 
         }
 
-        @Override
-        public void move() {
 
+        @Override
+        public Direction getDirection() {
+            return null;
+        }
+
+        @Override
+        public void setDirection(Direction dir) {
+
+        }
+
+        @Override
+        public Maze getMaze() {
+            return maze;
         }
     }
 }
