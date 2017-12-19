@@ -21,7 +21,6 @@ public class MazeRunner implements Healthable, Directionable {
     private final static int initialBullets = 6;
     private final static Direction initialDirection = Direction.Up;
     private final static int bulletDamage = 1;
-
     private final static int width = 1;
     private final static int height = 1;
 
@@ -139,12 +138,13 @@ public class MazeRunner implements Healthable, Directionable {
     public void affect(IMazeElement element) {
         if(element instanceof IMonster) {
             ((IMonster) element).setHealth(0);
-            maze.removeElement(element);
         }
-        else if(element instanceof IBomb)
-            maze.removeElement(element);
-        else if(element instanceof IGift)
-            maze.removeElement(element);
+        else if(element instanceof IBomb) {
+            ((IBomb) element).destroy();
+        }
+        else if(element instanceof IGift) {
+            ((IGift) element).destroy();
+        }
     }
 
     public void fire() {
