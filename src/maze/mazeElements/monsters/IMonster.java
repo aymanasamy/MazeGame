@@ -12,4 +12,7 @@ public interface IMonster extends Directionable, Healthable {
     int getHealth();
 
     void setHealth(int health);
+
+    void addObserver(IMonsterObserver observer);
+    void removeObserver(IMonsterObserver observer);
 }
