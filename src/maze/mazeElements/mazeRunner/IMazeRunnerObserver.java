@@ -8,4 +8,5 @@ public interface IMazeRunnerObserver extends IDirectionalbeObserver {
     void setHealth(int health);
     void setLives(int lives);
     void setBullets(int bullets);
+    void affect();
 }
