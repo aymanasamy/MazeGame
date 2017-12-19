@@ -5,6 +5,7 @@ import maze.Maze;
 import maze.mazeElements.Direction;
 import maze.mazeElements.DirectionableMover;
 import maze.mazeElements.Moveable;
+import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.mazeRunner.MazeRunner;
 
 import java.util.ArrayList;
@@ -90,6 +91,9 @@ public class VampireMonster implements IMonster, Moveable {
             while (iterator.hasNext()){
                 iterator.next().affect();
             }
+        }
+        if(element instanceof IBullet) {
+            ((IBullet) element).destroy();
         }
     }
 

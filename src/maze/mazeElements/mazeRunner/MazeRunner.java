@@ -7,6 +7,7 @@ import maze.mazeElements.Directionable;
 import maze.mazeElements.Healthable;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.bullets.BulletFactory;
+import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.bullets.IBulletsFactory;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
@@ -146,6 +147,8 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
         else if(element instanceof IGift) {
             ((IGift) element).destroy();
         }
+        else if(element instanceof IBullet)
+            ((IBullet) element).destroy();
     }
 
     public void fire() {

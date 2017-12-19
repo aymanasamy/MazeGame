@@ -2,6 +2,7 @@ package maze.mazeElements.gifts;
 
 import maze.IMazeElement;
 import maze.Maze;
+import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.mazeRunner.MazeRunner;
 
 /**
@@ -33,6 +34,8 @@ public class AmmoGift implements IGift {
             MazeRunner runner = (MazeRunner) element;
             runner.setBullets(runner.getBullets() + additinalAmmo);
         }
+        if (element instanceof IBullet)
+            ((IBullet) element).destroy();
     }
 
     @Override

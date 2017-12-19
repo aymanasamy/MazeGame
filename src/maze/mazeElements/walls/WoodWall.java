@@ -2,6 +2,7 @@ package maze.mazeElements.walls;
 
 import maze.IMazeElement;
 import maze.Maze;
+import maze.mazeElements.bullets.IBullet;
 
 public class WoodWall implements IWall {
     private Maze maze;
@@ -48,6 +49,7 @@ public class WoodWall implements IWall {
 
     @Override
     public void affect(IMazeElement element) {
-
+        if(element instanceof IBullet)
+            ((IBullet) element).destroy();
     }
 }

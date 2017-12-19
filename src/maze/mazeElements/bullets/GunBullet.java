@@ -57,9 +57,9 @@ public class GunBullet implements IBullet, Moveable {
         if(element instanceof Healthable)
             ((Healthable) element).setHealth(((Healthable) element).getHealth()-damage);
         else if(element instanceof IBomb)
-            maze.removeElement(element);
+            ((IBomb) element).destroy();
         else if(element instanceof IGift)
-            maze.removeElement(element);
+            ((IGift) element).destroy();
     }
 
     @Override

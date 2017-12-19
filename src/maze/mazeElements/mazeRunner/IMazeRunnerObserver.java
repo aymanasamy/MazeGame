@@ -4,7 +4,7 @@ import maze.mazeElements.IDirectionalbeObserver;
 
 import java.io.Serializable;
 
-public interface IMazeRunnerObserver extends DirectionalbeObserver, Serializable{
+public interface IMazeRunnerObserver extends IDirectionalbeObserver, Serializable{
     void fire();
     void destroy();
     void setHealth(int health);
