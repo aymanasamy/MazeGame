@@ -1,6 +1,8 @@
 package maze.mazeElements.mazeRunner;
 
-public interface IMazeRunnerState {
+import java.io.Serializable;
+
+public interface IMazeRunnerState extends Serializable {
     void moveRight();
 
     void moveLeft();

@@ -12,6 +12,7 @@ import maze.mazeElements.gates.IGate;
 import maze.mazeElements.gates.StartGate;
 import maze.mazeElements.gifts.IGiftFactory;
 import maze.mazeElements.gifts.RandomGiftFactory;
+import maze.mazeElements.mazeRunner.MazeRunner;
 import maze.mazeElements.monsters.IMonsterFactory;
 import maze.mazeElements.monsters.RandomMonsterFactory;
 import maze.mazeElements.walls.IWallFactory;
@@ -48,8 +49,9 @@ public class EndlessMazeBuilder implements IMazeBuilder {
 					myEndlessMaze.setElement(myElementPosition, myMonister.generate(myEndlessMaze, 5));
 				}
 				if (theMaze[i][j] == 'S') {
-					IGate mystart = new StartGate();
-					myEndlessMaze.setElement(myElementPosition, mystart);
+//					IGate mystart = new StartGate();
+//					myEndlessMaze.setElement(myElementPosition, mystart);
+					myEndlessMaze.setElement(myElementPosition, new MazeRunner());
 				}
 				if (theMaze[i][j] == 'E') {
 					IGate myEnd = new EndGate();

@@ -85,4 +85,9 @@ public class VampireMonster implements IMonster, Moveable {
     public Maze getMaze() {
         return maze;
     }
+
+    @Override
+    public void notifyMoveIn(Direction dir) {
+        // TODO: IMPLEMENT!
+    }
 }

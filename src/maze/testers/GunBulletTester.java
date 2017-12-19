@@ -260,5 +260,10 @@ public class GunBulletTester {
         public Maze getMaze() {
             return maze;
         }
+
+        @Override
+        public void notifyMoveIn(Direction dir) {
+            // TODO
+        }
     }
 }
