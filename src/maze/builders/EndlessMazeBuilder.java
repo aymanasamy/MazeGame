@@ -25,9 +25,9 @@ public class EndlessMazeBuilder implements IMazeBuilder {
 		
 		final int size = level * 3;
 		Stack<Point> myStack = new Stack();
-		MazeGenerationAlgorithm MyEndlessMazeinchractars = new MazeGenerationAlgorithm();
-		myStack = MyEndlessMazeinchractars.GetmazeInStack(size, size);
-		char[][] theMaze = MyEndlessMazeinchractars.GetMazeInCharacters(myStack, size, size);
+		MazeGenerationAlgorithm MyEndlessMazeInCharacters = new MazeGenerationAlgorithm();
+		myStack = MyEndlessMazeInCharacters.GetmazeInStack(size, size);
+		char[][] theMaze = MyEndlessMazeInCharacters.GetMazeInCharacters(myStack, size, size);
 		Maze MyEndlessMaze = new Maze(theMaze.length, theMaze[0].length);
 		for (int i = 0; i < theMaze.length; i++) {
 			for (int j = 0; j < theMaze[0].length; j++) {
