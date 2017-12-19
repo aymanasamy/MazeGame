@@ -25,4 +25,6 @@ public class MazeRunnerNormalState implements IMazeRunnerState {
     public void moveDown() {
         DirectionableMover.moveDown(mazeRunner);
     }
+
+
 }

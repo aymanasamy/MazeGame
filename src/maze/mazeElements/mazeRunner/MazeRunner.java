@@ -63,6 +63,9 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
     }
 
     public void setHealth(int health) {
+        if (state instanceof MazeRunnerWinState) {
+            return;
+        }
         if(health <= 0)
             setLives(getLives()-1);
         else
