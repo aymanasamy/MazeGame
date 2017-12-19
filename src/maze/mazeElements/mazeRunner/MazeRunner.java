@@ -31,7 +31,7 @@ public class MazeRunner implements Healthable, Directionable {
     private Maze maze;
     private Direction direction;
     private IMazeRunnerState state;
-    private List<MazeRunnerObserver> observerList;
+    private List<IMazeRunnerObserver> observerList;
 
     public MazeRunner(){
         this.state = new MazeRunnerNormalState(this);
@@ -66,7 +66,7 @@ public class MazeRunner implements Healthable, Directionable {
             setLives(getLives()-1);
         else
             this.health = health;
-        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().setLives(getLives());
         }
@@ -78,14 +78,14 @@ public class MazeRunner implements Healthable, Directionable {
         else
             this.lives = lives;
         if(lives > 0) {
-            Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+            Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
             while (iterator.hasNext()){
                 iterator.next().setLives(getLives());
             }
         }
         else
         {
-            Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+            Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
             while (iterator.hasNext()){
                 iterator.next().destroy();
             }
@@ -106,7 +106,7 @@ public class MazeRunner implements Healthable, Directionable {
             this.bullets = 0;
         else
             this.bullets = bullets;
-        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().setBullets(getBullets());
         }
@@ -150,7 +150,7 @@ public class MazeRunner implements Healthable, Directionable {
     public void fire() {
         if(bullets <= 0)
             return;
-        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().fire();
         }
@@ -165,7 +165,7 @@ public class MazeRunner implements Healthable, Directionable {
 
     @Override
     public void notifyMoveIn(Direction dir) {
-        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().moveTo(direction);
         }
@@ -178,17 +178,17 @@ public class MazeRunner implements Healthable, Directionable {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
-        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().setDirection(direction);
         }
     }
 
-    public void addObserver(MazeRunnerObserver observer){
+    public void addObserver(IMazeRunnerObserver observer){
         observerList.add(observer);
     }
 
-    public void removeObserver(MazeRunnerObserver observer){
+    public void removeObserver(IMazeRunnerObserver observer){
         observerList.remove(observer);
     }
 }
