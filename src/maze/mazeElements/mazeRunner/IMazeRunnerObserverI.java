@@ -1,8 +1,8 @@
 package maze.mazeElements.mazeRunner;
 
-import maze.mazeElements.DirectionalbeObserver;
+import maze.mazeElements.IDirectionalbeObserver;
 
-public interface IMazeRunnerObserver extends DirectionalbeObserver{
+public interface IMazeRunnerObserverI extends IDirectionalbeObserver {
     void fire();
     void destroy();
     void setHealth(int health);
