@@ -112,6 +112,16 @@ public class GunBulletTester {
         private Maze maze;
 
         @Override
+        public int getInitialHealth() {
+            return 1;
+        }
+
+        @Override
+        public boolean isBreakable() {
+            return true;
+        }
+
+        @Override
         public int getHealth() {
             return health;
         }
@@ -198,6 +208,12 @@ public class GunBulletTester {
     }
     private class TestMonster implements IMonster{
         private int health;
+
+        @Override
+        public int getInitialHealth() {
+            return 1;
+        }
+
         @Override
         public int getHealth() {
             return health;

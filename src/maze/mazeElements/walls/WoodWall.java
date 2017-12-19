@@ -8,10 +8,12 @@ public class WoodWall implements IWall {
     private static int width = 1;
     private static int height = 1;
     private int health = getInitialHealth();
-    static int getInitialHealth() {
+
+    public int getInitialHealth() {
         return 1;
     }
-    static boolean isBreakable() {
+
+    public boolean isBreakable() {
         return true;
     }
 

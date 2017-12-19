@@ -7,10 +7,10 @@ public class UnbreakableWall implements IWall {
     private static int width = 1;
     private static int height = 1;
     private Maze maze;
-    static int getInitialHealth() {
+    public int getInitialHealth() {
         return 1;
     }
-    static boolean isBreakable() {
+    public boolean isBreakable() {
         return false;
     }
     @Override

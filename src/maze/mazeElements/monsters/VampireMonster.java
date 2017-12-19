@@ -23,7 +23,7 @@ public class VampireMonster implements IMonster, Moveable {
         direction = Direction.Up; // Initial direction
     }
 
-    public static int getInitialHealth() {
+    public  int getInitialHealth() {
         return initialHealth;
     }
 
