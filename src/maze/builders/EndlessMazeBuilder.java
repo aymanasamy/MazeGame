@@ -28,46 +28,46 @@ public class EndlessMazeBuilder implements IMazeBuilder {
 		MazeGenerationAlgorithm MyEndlessMazeinchractars = new MazeGenerationAlgorithm();
 		myStack = MyEndlessMazeinchractars.GetmazeInStack(size, size);
 		char[][] theMaze = MyEndlessMazeinchractars.GetMazeInCharacters(myStack, size, size);
-		Maze myEndlessMaze = new Maze(theMaze.length, theMaze[0].length);
+		Maze MyEndlessMaze = new Maze(theMaze.length, theMaze[0].length);
 		for (int i = 0; i < theMaze.length; i++) {
 			for (int j = 0; j < theMaze[0].length; j++) {
 				Point myElementPosition = new Point(i, j);
 				if (theMaze[i][j] == 'B') {
 					IBombFactory myboomb = RandomBombFactory.getInstance();
-					myEndlessMaze.setElement(myElementPosition, myboomb.generate(myEndlessMaze));
+					MyEndlessMaze.setElement(myElementPosition, myboomb.generate(MyEndlessMaze));
 
 				}
 				if (theMaze[i][j] == 'G') {
 					IGiftFactory mygift = RandomGiftFactory.getInstance();
-					myEndlessMaze.setElement(myElementPosition, mygift.generate(myEndlessMaze));
+					MyEndlessMaze.setElement(myElementPosition, mygift.generate(MyEndlessMaze));
 
 				}
 
 				if (theMaze[i][j] == 'M') {
 					IMonsterFactory myMonister = RandomMonsterFactory.getInstance();
-					myEndlessMaze.setElement(myElementPosition, myMonister.generate(myEndlessMaze, 5));
+					MyEndlessMaze.setElement(myElementPosition, myMonister.generate(MyEndlessMaze, 5));
 				}
 				if (theMaze[i][j] == 'S') {
 					IGate mystart = new StartGate();
-					myEndlessMaze.setElement(myElementPosition, mystart);
+					MyEndlessMaze.setElement(myElementPosition, mystart);
 				}
 				if (theMaze[i][j] == 'E') {
 					IGate myEnd = new EndGate();
-					myEndlessMaze.setElement(myElementPosition, myEnd);
+					MyEndlessMaze.setElement(myElementPosition, myEnd);
 				}
 				if (theMaze[i][j] == '#') {
 					IWallFactory mywall = RandomWallFactory.getInstance();
-					myEndlessMaze.setElement(myElementPosition, mywall.generate(myEndlessMaze, false, 500));
+					MyEndlessMaze.setElement(myElementPosition, mywall.generate(MyEndlessMaze, false, 500));
 				}
 				if (theMaze[i][j] == 'T') {
 					IWallFactory myTree = RandomWallFactory.getInstance();
-					myEndlessMaze.setElement(myElementPosition, myTree.generate(myEndlessMaze, true,1));
+					MyEndlessMaze.setElement(myElementPosition, myTree.generate(MyEndlessMaze, true,1));
 				}
 
 			}
 		}
 
-		return myEndlessMaze;
+		return MyEndlessMaze;
 	}
 
 	@Override
