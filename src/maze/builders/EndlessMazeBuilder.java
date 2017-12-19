@@ -71,9 +71,4 @@ public class EndlessMazeBuilder implements IMazeBuilder {
 
 		return myEndlessMaze;
 	}
-
-	@Override
-	public IMazeBuilder getInstance() {
-		return null;
-	}
 }
