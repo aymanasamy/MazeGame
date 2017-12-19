@@ -11,14 +11,11 @@ import maze.mazeElements.bullets.IBulletsFactory;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
 
-public class MazeRunner implements Healthable, Directionable {
-    private int health;
-    private int lives;
-    private int bullets;
-    private Maze maze;
-    private Direction direction;
-    private IMazeRunnerState state;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+public class MazeRunner implements Healthable, Directionable {
     private final static int initialLives = 3;
     private final static int initialHealth = 10;
     private final static int initialBullets = 6;
@@ -28,12 +25,21 @@ public class MazeRunner implements Healthable, Directionable {
     private final static int width = 1;
     private final static int height = 1;
 
+    private int health;
+    private int lives;
+    private int bullets;
+    private Maze maze;
+    private Direction direction;
+    private IMazeRunnerState state;
+    private List<MazeRunnerObserver> observerList;
+
     public MazeRunner(){
         this.state = new MazeRunnerNormalState(this);
         this.lives = initialLives;
         this.bullets = initialBullets;
         this.health = initialHealth;
         this.direction = initialDirection;
+        observerList = new ArrayList<>();
     }
     public void moveRight() {
         state.moveRight();
@@ -60,6 +66,10 @@ public class MazeRunner implements Healthable, Directionable {
             setLives(getLives()-1);
         else
             this.health = health;
+        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        while (iterator.hasNext()){
+            iterator.next().setLives(getLives());
+        }
     }
 
     public void setLives(int lives) {
@@ -67,6 +77,20 @@ public class MazeRunner implements Healthable, Directionable {
             this.lives = 0;
         else
             this.lives = lives;
+        if(lives > 0) {
+            Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+            while (iterator.hasNext()){
+                iterator.next().setLives(getLives());
+            }
+        }
+        else
+        {
+            Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+            while (iterator.hasNext()){
+                iterator.next().destroy();
+            }
+        }
+
     }
 
     public int getLives() {
@@ -82,6 +106,10 @@ public class MazeRunner implements Healthable, Directionable {
             this.bullets = 0;
         else
             this.bullets = bullets;
+        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        while (iterator.hasNext()){
+            iterator.next().setBullets(getBullets());
+        }
     }
 
     public IMazeRunnerState getState() {
@@ -122,8 +150,13 @@ public class MazeRunner implements Healthable, Directionable {
     public void fire() {
         if(bullets <= 0)
             return;
+        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        while (iterator.hasNext()){
+            iterator.next().fire();
+        }
         IBulletsFactory bulletsFactory = BulletFactory.getInstance();
         bulletsFactory.generate(maze,bulletDamage,direction);
+        setBullets(getBullets()-1);
     }
 
     public Maze getMaze() {
@@ -138,5 +171,17 @@ public class MazeRunner implements Healthable, Directionable {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        while (iterator.hasNext()){
+            iterator.next().setDirection(direction);
+        }
+    }
+
+    public void addObserver(MazeRunnerObserver observer){
+        observerList.add(observer);
+    }
+
+    public void removeObserver(MazeRunnerObserver observer){
+        observerList.remove(observer);
     }
 }
