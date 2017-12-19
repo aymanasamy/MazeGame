@@ -108,7 +108,7 @@ public class Maze {
     }
 
     private boolean elementIsNotInTheMaze(Point position, IMazeElement element) {
-        return isNotInTheMaze(position) || isNotInTheMaze(new Point(position.x + element.getWidth(), position.y + element.getHeight()));
+        return isNotInTheMaze(position) || isNotInTheMaze(new Point(position.x + element.getWidth()-1, position.y + element.getHeight()-1));
     }
 
     private boolean isNotInTheMaze(Point position) {
