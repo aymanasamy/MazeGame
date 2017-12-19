@@ -163,6 +163,13 @@ public class MazeRunner implements Healthable, Directionable {
         return maze;
     }
 
+    @Override
+    public void notifyMoveIn(Direction dir) {
+        Iterator<MazeRunnerObserver> iterator = observerList.iterator();
+        while (iterator.hasNext()){
+            iterator.next().moveTo(direction);
+        }
+    }
 
 
     public Direction getDirection() {
