@@ -375,6 +375,7 @@ public class MazeGenerationAlgorithm {
 		MyCompleteMaze = putBooms(MyCompleteMaze, 0);
 		MyCompleteMaze = putGifts(MyCompleteMaze, 0);
 		MyCompleteMaze = putMonisters(MyCompleteMaze, 0);
+		MyCompleteMaze = puttrees(MyCompleteMaze,0);
 
 		return MyCompleteMaze;
 	}
