@@ -8,23 +8,10 @@ import maze.mazeElements.mazeRunner.MazeRunner;
 /**
  * A bomb that always kills whenever touched.
  */
-public class DynamiteBomb implements IBomb {
-    private static final int width = 1;
-    private static final int height = 1;
-    private Maze maze;
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    @Override
-    public void setMaze(Maze maze) {
-        this.maze = maze;
+public class DynamiteBomb extends IBomb {
+    public DynamiteBomb() {
+        width = 1;
+        height = 1;
     }
 
     @Override
@@ -36,10 +23,5 @@ public class DynamiteBomb implements IBomb {
         if(element instanceof IBullet) {
             ((IBullet) element).destroy();
         }
-    }
-
-    @Override
-    public void destroy() {
-        maze.removeElement(this);
     }
 }
