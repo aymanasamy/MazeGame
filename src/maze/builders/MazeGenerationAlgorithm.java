@@ -3,8 +3,12 @@ package maze.builders;
 import java.awt.Point;
 import java.util.Random;
 import java.util.Stack;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class MazeGenerationAlgorithm {
+    private String lineSeparator = System.getProperty("line.separator");
+	private static final Logger logger = LogManager.getLogger(MazeGenerationAlgorithm.class);
 	public static Stack<Point> myWay = new Stack();
 	public static Stack<Point> planb = new Stack();
 
@@ -13,7 +17,19 @@ public class MazeGenerationAlgorithm {
 	
 	static boolean[][] visited;
 
+    private String mazeToString(char[][] theMaze) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < theMaze[0].length; ++i) {
+            for(int j = 0; j < theMaze.length; ++j) {
+                sb.append(theMaze[j][i] + " ");
+            }
+            sb.append(lineSeparator);
+        }
+        return sb.toString();
+    }
+
 	public Stack<Point> GetmazeInStack(int width, int height) {
+        logger.info("Generating a {}x{} maze", width, height);
 		int ObserveEnd = 0;
 		maze = new char[width][height];
 		visited = new boolean[width][height];
@@ -59,6 +75,7 @@ public class MazeGenerationAlgorithm {
 					for (z = 0; z < visited[0].length; z++) {
 						if (!visited[w][z]) {
 							// System.out.println(w+" "+z);
+                            logger.debug("Not visited: [{}][{}]", w, z);
 							checkoutIfThereExistUnvisitedCell = 1;
 							break;
 						}
@@ -145,6 +162,7 @@ public class MazeGenerationAlgorithm {
 
 	private static Point SearchRight(Point currentPosition) {
 
+        logger.debug("Searching right [{}][{}]", currentPosition.x, currentPosition.y);
 		int x = currentPosition.x;
 		int y = currentPosition.y;
 		// System.out.println(x+" "+y);
@@ -166,6 +184,7 @@ public class MazeGenerationAlgorithm {
 	}
 
 	private static Point SearchLeft(Point currentPosition) {
+        logger.debug("Searching left [{}][{}]", currentPosition.x, currentPosition.y);
 		// System.out.println("sfdfs");
 		int x = currentPosition.x;
 		int y = currentPosition.y;
@@ -191,6 +210,7 @@ public class MazeGenerationAlgorithm {
 	}
 
 	private static Point SearchDown(Point currentPosition) {
+        logger.debug("Searching down [{}][{}]", currentPosition.x, currentPosition.y);
 		int x = currentPosition.x;
 		int y = currentPosition.y;
 		// System.out.println(x+" "+y);
@@ -213,6 +233,7 @@ public class MazeGenerationAlgorithm {
 	}
 
 	private static Point SearchUp(Point currentPosition) {
+        logger.debug("Searching up [{}][{}]", currentPosition.x, currentPosition.y);
 		int x = currentPosition.x;
 		int y = currentPosition.y;
 		// System.out.println(x+" "+y);
@@ -237,6 +258,7 @@ public class MazeGenerationAlgorithm {
 	}
 
 	public static boolean checkAround(Point mypoint) {
+        logger.debug("Checking around [{}][{}]", mypoint.x, mypoint.y);
 
 		if ((mypoint.x) - 1 > 0) {
 
@@ -267,6 +289,7 @@ public class MazeGenerationAlgorithm {
 	}
 
 	public static Point Search(Point CurrentPosition) {
+        logger.debug("Search around [{}][{}]", CurrentPosition.x, CurrentPosition.y);
 		Random rand = new Random();
 		int Direction = rand.nextInt(4) + 1;
 		Point temp = new Point(0, 0);
@@ -382,6 +405,7 @@ public class MazeGenerationAlgorithm {
 	
 	
 	public char [][] putBooms(char [][]MyCompleteMaze,int difficulty){
+        logger.debug("Populating maze with bombs");
 		final int NumOfBooms = MyCompleteMaze.length / 2;
 		int i=0;
 		while(i<NumOfBooms) {
@@ -406,6 +430,7 @@ public class MazeGenerationAlgorithm {
 		return MyCompleteMaze;
 	}
 	public char [][] putMonisters(char [][]MyCompleteMaze,int difficulty){
+        logger.debug("Populating maze with monsters");
 		final int NumOfMonisters = MyCompleteMaze.length / 2;
 		int i=0;
 		while(i<NumOfMonisters) {
@@ -431,6 +456,7 @@ public class MazeGenerationAlgorithm {
 		return MyCompleteMaze;
 	}
 	public char [][] putGifts(char [][]MyCompleteMaze,int difficulty){
+        logger.debug("Populating maze with gifts");
 		final int NumOfGifts = MyCompleteMaze.length / 2;
 		int i=0;
 		while(i<NumOfGifts) {
@@ -456,6 +482,7 @@ public class MazeGenerationAlgorithm {
 		
 	}
 	public char [][] puttrees(char [][]MyCompleteMaze,int difficulty){
+        logger.debug("Populating maze with tree");
 		final int NumOftrees = MyCompleteMaze.length / 2;
 		int i=0;
 		while(i<NumOftrees) {
