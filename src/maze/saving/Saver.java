@@ -2,11 +2,14 @@ package maze.saving;
 
 import maze.Maze;
 import maze.builders.Difficulty;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 
 public class Saver {
     private static Saver instance;
+    private static final Logger logger = LogManager.getLogger(Saver.class);
 
     private Saver() {}
 
@@ -18,15 +21,17 @@ public class Saver {
     }
 
     public void save(Difficulty difficulty,int level,Maze maze) {
+        logger.debug("Saving maze with difficulty {} and level {}", difficulty.toString(), level);
         GameState currentState = new GameState(level, difficulty, maze);
         try {
             FileOutputStream fos = new FileOutputStream(
                     String.format("%d-%s.maze", level, difficulty.toString()));
+            logger.debug("Saving to {}", String.format("%d-%s.maze", level, difficulty.toString()));
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(currentState);
             oos.close();
         } catch (java.io.IOException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
     }
 
@@ -34,6 +39,7 @@ public class Saver {
         Maze loadedMaze = null;
 
         if (isSaved(difficulty, level)) {
+            logger.debug("Loading maze from {}-{}.maze", difficulty.toString(), level);
             try {
                 FileInputStream fis = new FileInputStream(
                         String.format("%d-%s.maze", level, difficulty.toString()));
@@ -44,9 +50,9 @@ public class Saver {
                     loadedMaze = loadedState.getMaze();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e.toString());
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                logger.error(e.toString());
             }
         }
 
