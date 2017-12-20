@@ -24,16 +24,16 @@ public class Maze implements Serializable {
         logger.debug("Constructing a {}x{} Maze object", width, height);
         this.width = width;
         this.height = height;
-        map = new IMazeElement[width][height];
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        map = new IMazeElement[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 map[i][j] = new EmptyElement();
             }
         }
     }
     public MazeRunner getMazeRunner(){
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 if (map[i][j] instanceof MazeRunner) {
                     return (MazeRunner) map[i][j];
                 }
@@ -73,7 +73,7 @@ public class Maze implements Serializable {
         // Affect all elements in this place
         logger.debug("Affecting elements in this place");
         ArrayList<IMazeElement> affectedElements = new ArrayList<>();
-        for (int i = position.x; i < position.x + element.getWidth(); i++) {
+        for (int i = position.x; i < position.x + element.getHeight(); i++) {
             for (int j = position.y; j < position.y + element.getHeight(); j++) {
                 IMazeElement elementInPosition = map[i][j];
                 if(!affectedElements.contains(elementInPosition)) {
@@ -98,8 +98,8 @@ public class Maze implements Serializable {
     public Point getPosition(IMazeElement element) {
         // Add all the points that have this element
         ArrayList<Point> points = new ArrayList<>();
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 if (element == map[i][j]) {
                     points.add(new Point(i, j));
                 }
@@ -115,7 +115,7 @@ public class Maze implements Serializable {
 
     private boolean hasFreeSpace(Point position, IMazeElement element) {
         boolean hasFreeSpace = true;
-        for (int i = position.x; i < position.x + element.getWidth(); i++) {
+        for (int i = position.x; i < position.x + element.getHeight(); i++) {
             for (int j = position.y; j < position.y + element.getHeight(); j++) {
                 if (!(map[i][j] instanceof EmptyElement)) {
                     hasFreeSpace = false;
@@ -127,10 +127,10 @@ public class Maze implements Serializable {
     }
 
     private boolean elementIsNotInTheMaze(Point position, IMazeElement element) {
-        return isNotInTheMaze(position) || isNotInTheMaze(new Point(position.x + element.getWidth()-1, position.y + element.getHeight()-1));
+        return isNotInTheMaze(position) || isNotInTheMaze(new Point(position.x + element.getHeight()-1, position.y + element.getWidth()-1));
     }
 
     private boolean isNotInTheMaze(Point position) {
-        return position.x >= width || position.x < 0 || position.y < 0 || position.y >= height;
+        return position.x >= height || position.x < 0 || position.y < 0 || position.y >= width;
     }
 }
