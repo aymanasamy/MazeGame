@@ -41,7 +41,7 @@ public class VampireMonster implements IMonster, Moveable {
     @Override
     public void setHealth(int health) {
         this.health = health;
-        if (this.health < 0) {
+        if (this.health <= 0) {
             health = 0;
             maze.removeElement(this);
             Iterator<IMonsterObserver> iterator = observerList.iterator();
@@ -78,6 +78,11 @@ public class VampireMonster implements IMonster, Moveable {
     }
 
     @Override
+    public boolean exist() {
+        return getHealth() > 0;
+    }
+
+    @Override
     public void setMaze(Maze maze) {
         this.maze = maze;
     }
@@ -86,7 +91,8 @@ public class VampireMonster implements IMonster, Moveable {
     public void affect(IMazeElement element) {
         if (element instanceof MazeRunner) {
             MazeRunner runner = (MazeRunner) element;
-            runner.setHealth(runner.getHeight() - 1);
+            runner.setHealth(runner.getHealth() - 1);
+
             Iterator<IMonsterObserver> iterator = observerList.iterator();
             while (iterator.hasNext()){
                 iterator.next().affect();

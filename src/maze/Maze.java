@@ -7,8 +7,10 @@ import maze.mazeElements.monsters.IMonster;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Maze implements Serializable {
     private int width;
@@ -61,13 +63,18 @@ public class Maze implements Serializable {
         if (elementIsNotInTheMaze(position, element))
             return false;
         // Affect all elements in this place
+        ArrayList<IMazeElement> affectedElements = new ArrayList<>();
         for (int i = position.x; i < position.x + element.getWidth(); i++) {
             for (int j = position.y; j < position.y + element.getHeight(); j++) {
-                element.affect(map[i][j]);
-                map[i][j].affect(element);
+                IMazeElement elementInPosition = map[i][j];
+                if(!affectedElements.contains(elementInPosition)) {
+                    element.affect(elementInPosition);
+                    elementInPosition.affect(element);
+                    affectedElements.add(elementInPosition);
+                }
             }
         }
-        if (!hasFreeSpace(position, element))
+        if (!hasFreeSpace(position, element) || !element.exist())
             return false;
         for (int i = position.x; i < position.x + element.getWidth(); i++) {
             for (int j = position.y; j < position.y + element.getHeight(); j++) {

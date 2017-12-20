@@ -12,11 +12,15 @@ public abstract class IBomb implements IMazeElement {
     protected int height = 1;
     protected Maze maze = null;
     private List<IBombObserver> observerList;
+    protected boolean exist = true;
 
     public IBomb() {
         observerList = new ArrayList<>();
     }
-
+    @Override
+    public boolean exist() {
+        return exist;
+    }
     private void notifyDestroyed() {
         Iterator<IBombObserver> iterator = observerList.iterator();
         while (iterator.hasNext()) {
@@ -41,6 +45,7 @@ public abstract class IBomb implements IMazeElement {
 
     public void destroy() {
         maze.removeElement(this);
+        exist = false;
         notifyDestroyed();
     }
 

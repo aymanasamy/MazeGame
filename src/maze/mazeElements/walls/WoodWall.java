@@ -43,6 +43,11 @@ public class WoodWall implements IWall {
     }
 
     @Override
+    public boolean exist() {
+        return getHealth() > 0;
+    }
+
+    @Override
     public void setMaze(Maze maze) {
         this.maze = maze;
     }

@@ -21,17 +21,21 @@ public abstract class IBullet implements IMazeElement, Moveable, Directionable {
     protected int damage = 1;
     protected Direction direction;
     protected Maze maze;
+    protected boolean exist = true;
     private List<IBulletObserver> observerList;
-
     public IBullet() {
         observerList = new ArrayList<>();
     }
-
     private void notifyDestroyed() {
         Iterator<IBulletObserver> iterator = observerList.iterator();
         while (iterator.hasNext()) {
             iterator.next().destroy();
         }
+    }
+
+    @Override
+    public boolean exist() {
+        return exist;
     }
 
     public int getDamage() {

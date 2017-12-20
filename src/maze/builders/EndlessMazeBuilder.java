@@ -47,7 +47,9 @@ public class EndlessMazeBuilder implements IMazeBuilder {
 					myEndlessMaze.setElement(myElementPosition, myMonister.generate(myEndlessMaze, 5));
 				}
 				if (theMaze[i][j] == 'S') {
-					myEndlessMaze.setElement(myElementPosition, new MazeRunner());
+					MazeRunner mazeRunner =  new MazeRunner();
+					mazeRunner.setMaze(myEndlessMaze);
+					myEndlessMaze.setElement(myElementPosition,mazeRunner);
 				}
 				if (theMaze[i][j] == 'E') {
 					IGate myEnd = new EndGate();

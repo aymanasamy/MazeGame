@@ -17,6 +17,11 @@ public class EmptyElement implements IMazeElement {
     }
 
     @Override
+    public boolean exist() {
+        return true;
+    }
+
+    @Override
     public void setMaze(Maze maze) {
         this.maze = maze;
     }

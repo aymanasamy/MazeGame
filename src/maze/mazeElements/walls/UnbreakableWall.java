@@ -35,6 +35,11 @@ public class UnbreakableWall implements IWall {
     }
 
     @Override
+    public boolean exist() {
+        return true;
+    }
+
+    @Override
     public void setMaze(Maze maze) {
         this.maze = maze;
     }

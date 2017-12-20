@@ -76,25 +76,22 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
         }
     }
 
-    public void setLives(int lives) {
-        if(lives <= 0)
+    private void setLives(int lives) {
+        if(lives <= 0) {
             this.lives = 0;
-        else
-            this.lives = lives;
-        if(lives > 0) {
-            Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
-            while (iterator.hasNext()){
-                iterator.next().setLives(getLives());
-            }
-        }
-        else
-        {
+            maze.removeElement(this);
             Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
             while (iterator.hasNext()){
                 iterator.next().destroy();
             }
         }
-
+        else {
+            this.lives = lives;
+            Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
+            while (iterator.hasNext()){
+                iterator.next().setLives(getLives());
+            }
+        }
     }
 
     public int getLives() {
@@ -115,7 +112,10 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
             iterator.next().setBullets(getBullets());
         }
     }
-
+    @Override
+    public boolean exist() {
+        return getLives() > 0;
+    }
     public IMazeRunnerState getState() {
         return state;
     }

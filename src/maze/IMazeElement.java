@@ -7,6 +7,8 @@ public interface IMazeElement extends Serializable {
 
     int getHeight();
 
+    boolean exist();
+
     void setMaze(Maze maze);
 
     void affect(IMazeElement element);
