@@ -71,6 +71,10 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
             setLives(getLives()-1);
         else
             this.health = health;
+        notifyLives();
+    }
+
+    private void notifyLives() {
         Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().setLives(getLives());
@@ -172,13 +176,13 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
     private Point getBulletPos() {
         Point bulletPos = new Point(maze.getPosition(this));
         if(direction.equals(Direction.Right))
-            bulletPos.x++;
-        else if(direction.equals(Direction.Left))
-            bulletPos.x--;
-        else if(direction.equals(Direction.Down))
-            bulletPos.y--;
-        else if(direction.equals(Direction.Up))
             bulletPos.y++;
+        else if(direction.equals(Direction.Left))
+            bulletPos.y--;
+        else if(direction.equals(Direction.Down))
+            bulletPos.x++;
+        else if(direction.equals(Direction.Up))
+            bulletPos.x--;
 
         return bulletPos;
     }

@@ -38,6 +38,7 @@ public class TerminalMain {
 
         IMazeBuilder mazeBuilder = new EndlessMazeBuilder();
         maze = mazeBuilder.generate(2, Difficulty.Hard);
+
         mazeRunner = maze.getMazeRunner();
         refresh();
         Player player = new Player();
@@ -66,10 +67,10 @@ public class TerminalMain {
         System.out.println("Health : "+mazeRunner.getHealth());;
         System.out.println("Ammo : "+mazeRunner.getBullets());;
         System.out.println("Lives : "+mazeRunner.getLives());;
-        for(int i = maze.getHeight()-1;i >= 0;i--) {
+        for(int i = 0;i < maze.getHeight();i++) {
             for (int j = 0;j < maze.getWidth();j++) {
                 Character character = new Character('?');
-                IMazeElement element = maze.getElement(new Point(j,i));
+                IMazeElement element = maze.getElement(new Point(i,j));
                 if(element instanceof MazeRunner)
                     character = 'P';
                 if(element instanceof UnbreakableWall)

@@ -46,6 +46,6 @@ public class Player implements IMazeRunnerObserver {
         if(direction.equals(Direction.Right)) {
             // Move Right
         }
-        //TerminalMain.refresh();
+        TerminalMain.refresh();
     }
 }

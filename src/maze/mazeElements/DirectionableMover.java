@@ -10,7 +10,7 @@ public class DirectionableMover {
         if(element.getDirection().equals(Direction.Right)) {
             Maze maze = element.getMaze();
             Point intialPosition = maze.getPosition(element);
-            Point nextPosition = new Point(intialPosition.x+1,intialPosition.y);
+            Point nextPosition = new Point(intialPosition.x,intialPosition.y+1);
             maze.removeElement(element);
             if(!maze.setElement(nextPosition,element)) {
                 maze.setElement(intialPosition,element);
@@ -27,7 +27,7 @@ public class DirectionableMover {
         if(element.getDirection().equals(Direction.Left)) {
             Maze maze = element.getMaze();
             Point intialPosition = maze.getPosition(element);
-            Point nextPosition = new Point(intialPosition.x-1,intialPosition.y);
+            Point nextPosition = new Point(intialPosition.x,intialPosition.y-1);
             maze.removeElement(element);
             if(!maze.setElement(nextPosition,element)) {
                 maze.setElement(intialPosition,element);
@@ -44,7 +44,7 @@ public class DirectionableMover {
         if(element.getDirection().equals(Direction.Up)) {
             Maze maze = element.getMaze();
             Point intialPosition = maze.getPosition(element);
-            Point nextPosition = new Point(intialPosition.x,intialPosition.y+1);
+            Point nextPosition = new Point(intialPosition.x-1,intialPosition.y);
             maze.removeElement(element);
             if(!maze.setElement(nextPosition,element)) {
                 maze.setElement(intialPosition,element);
@@ -61,7 +61,7 @@ public class DirectionableMover {
         if(element.getDirection().equals(Direction.Down)) {
             Maze maze = element.getMaze();
             Point intialPosition = maze.getPosition(element);
-            Point nextPosition = new Point(intialPosition.x,intialPosition.y-1);
+            Point nextPosition = new Point(intialPosition.x+1,intialPosition.y);
             maze.removeElement(element);
             if(!maze.setElement(nextPosition,element)) {
                 maze.setElement(intialPosition,element);
