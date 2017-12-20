@@ -1,12 +1,15 @@
 package maze.mazeElements.bombs;
 
 import maze.Maze;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class RandomBombFactory implements IBombFactory {
+    private static final Logger logger = LogManager.getLogger(RandomBombFactory.class);
     private static RandomBombFactory instance;
     private List<Class<? extends IBomb>> bombClasses;
 
@@ -23,6 +26,7 @@ public class RandomBombFactory implements IBombFactory {
 
     @Override
     public IBomb generate(Maze maze) {
+        logger.debug("Generating a random bomb");
         IBomb generatedBomb = null;
         if (!bombClasses.isEmpty()) {
             Random rand = new Random();
@@ -30,10 +34,11 @@ public class RandomBombFactory implements IBombFactory {
             try {
                 generatedBomb = bombType.newInstance();
                 generatedBomb.setMaze(maze);
+                logger.debug("Generated a bomb of type {}", generatedBomb.getClass().getSimpleName());
             } catch (InstantiationException e) {
-                e.printStackTrace();
+                logger.error(e.toString());
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                logger.error(e.toString());
             }
         }
         return generatedBomb;
@@ -42,5 +47,6 @@ public class RandomBombFactory implements IBombFactory {
     @Override
     public void addBomb(Class<? extends IBomb> bomb) {
         bombClasses.add(bomb);
+        logger.debug("Added a bomb of type {}", bomb.getSimpleName());
     }
 }

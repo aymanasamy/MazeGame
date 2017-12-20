@@ -1,10 +1,13 @@
 package maze.mazeElements.walls;
 
 import maze.Maze;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
 public class RandomWallFactory implements IWallFactory {
+    private static final Logger logger = LogManager.getLogger(RandomWallFactory.class);
     private static RandomWallFactory instance;
     private Map<Integer, List<Class<? extends IWall>>> breakableWallClasses;
     private Map<Integer, List<Class<? extends IWall>>> unbreakableWallClasses;
@@ -38,10 +41,11 @@ public class RandomWallFactory implements IWallFactory {
                 try {
                     generatedWall = WallType.newInstance();
                     generatedWall.setMaze(maze);
+                    logger.debug("Generated wall of type {}", WallType.getSimpleName());
                 } catch (InstantiationException e) {
-                    e.printStackTrace();
+                    logger.error(e.toString());
                 } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    logger.error(e.toString());
                 }
             }
         }
@@ -62,5 +66,7 @@ public class RandomWallFactory implements IWallFactory {
             wallClasses.put(initialHealth, new ArrayList<Class<? extends IWall>>());
         }
         wallClasses.get(initialHealth).add(wall);
+        logger.debug("Added wall type {}", wall.getSimpleName());
+        logger.debug("Number of available walls of this type: {}", wallClasses.get(initialHealth).size());
     }
 }

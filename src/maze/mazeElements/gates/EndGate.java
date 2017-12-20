@@ -32,7 +32,6 @@ public class EndGate implements IGate {
     @Override
     public void affect(IMazeElement element) {
         if (element instanceof MazeRunner) {
-            System.out.println("Mission Accomplished");
             ((MazeRunner) element).setState(new MazeRunnerWinState((MazeRunner) element));
         }
     }

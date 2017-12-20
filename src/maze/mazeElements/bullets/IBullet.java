@@ -9,6 +9,8 @@ import maze.mazeElements.Moveable;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.bombs.IBombObserver;
 import maze.mazeElements.gifts.IGift;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public abstract class IBullet implements IMazeElement, Moveable, Directionable {
+    private static final Logger logger = LogManager.getLogger(IBullet.class);
     protected int width = 1;
     protected int height = 1;
     protected int damage = 1;
@@ -61,15 +64,19 @@ public abstract class IBullet implements IMazeElement, Moveable, Directionable {
         Point initialPosition = maze.getPosition(this);
         maze.removeElement(this);
         if (direction.equals(Direction.Right)) {
+            logger.debug("Moving bullet one step to the right");
             Point nextPosition = new Point(initialPosition.x + 1, initialPosition.y);
             maze.setElement(nextPosition, this);
         } else if (direction.equals(Direction.Left)) {
+            logger.debug("Moving bullet one step to the left");
             Point nextPosition = new Point(initialPosition.x - 1, initialPosition.y);
             maze.setElement(nextPosition, this);
         } else if (direction.equals(Direction.Up)) {
+            logger.debug("Moving bullet one step up");
             Point nextPosition = new Point(initialPosition.x, initialPosition.y + 1);
             maze.setElement(nextPosition, this);
         } else if (direction.equals(Direction.Down)) {
+            logger.debug("Moving bullet one step down");
             Point nextPosition = new Point(initialPosition.x, initialPosition.y - 1);
             maze.setElement(nextPosition, this);
         }

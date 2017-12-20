@@ -11,6 +11,8 @@ import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.bullets.IBulletsFactory;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -19,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MazeRunner implements Healthable, Directionable, Serializable {
+    private static final Logger logger = LogManager.getLogger(MazeRunner.class);
     private final static int initialLives = 3;
     private final static int initialHealth = 10;
     private final static int initialBullets = 6;
@@ -83,6 +86,7 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
 
     private void setLives(int lives) {
         if(lives <= 0) {
+            logger.info("Player died");
             this.lives = 0;
             maze.removeElement(this);
             Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
@@ -112,6 +116,7 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
             this.bullets = 0;
         else
             this.bullets = bullets;
+        logger.info("Player has {} bullets", this.bullets);
         Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().setBullets(getBullets());
@@ -126,6 +131,10 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
     }
 
     public void setState(IMazeRunnerState state) {
+        logger.debug("Player state set to {}", state.getClass().getSimpleName());
+        if (state instanceof MazeRunnerWinState) {
+            logger.info("Player won");
+        }
         this.state = state;
     }
 
@@ -150,19 +159,24 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
             ((IMonster) element).setHealth(0);
         }
         else if(element instanceof IBomb) {
+            logger.info("Player touched {}", element.getClass().getSimpleName());
             ((IBomb) element).destroy();
         }
         else if(element instanceof IGift) {
+            logger.info("Player touched {}", element.getClass().getSimpleName());
             ((IGift) element).destroy();
         }
-        else if(element instanceof IBullet)
+        else if(element instanceof IBullet) {
+            logger.info("Player touched {}", element.getClass().getSimpleName());
             ((IBullet) element).destroy();
+        }
     }
 
     public void fire() {
         if(bullets <= 0)
             return;
         IBulletsFactory bulletsFactory = BulletFactory.getInstance();
+        logger.info("Firing a bullet of {} damage in {} direction", bulletDamage, direction.toString());
         IBullet bullet = bulletsFactory.generate(maze,bulletDamage,direction);
         Point bulletPos = getBulletPos();
         maze.setElement(bulletPos,bullet);

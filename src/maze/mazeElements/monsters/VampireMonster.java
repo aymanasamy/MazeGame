@@ -7,6 +7,8 @@ import maze.mazeElements.DirectionableMover;
 import maze.mazeElements.Moveable;
 import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.mazeRunner.MazeRunner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,6 +16,8 @@ import java.util.List;
 import java.util.Random;
 
 public class VampireMonster implements IMonster, Moveable {
+
+    private static final Logger logger = LogManager.getLogger(VampireMonster.class);
 
     private static final int width = 1;
     private static final int height = 1;
@@ -25,6 +29,7 @@ public class VampireMonster implements IMonster, Moveable {
     private List<IMonsterObserver> observerList;
 
     public VampireMonster() {
+        logger.debug("Created VampireMonster");
         observerList = new ArrayList<>();
         direction = Direction.Up; // Initial direction
     }
@@ -42,6 +47,7 @@ public class VampireMonster implements IMonster, Moveable {
     public void setHealth(int health) {
         this.health = health;
         if (this.health <= 0) {
+            logger.debug("Monster {} of type VampireMonster died", this.hashCode());
             health = 0;
             maze.removeElement(this);
             Iterator<IMonsterObserver> iterator = observerList.iterator();
@@ -59,11 +65,13 @@ public class VampireMonster implements IMonster, Moveable {
 
     @Override
     public void addObserver(IMonsterObserver observer) {
+        logger.debug("Adding observer {}", observer.toString());
         observerList.add(observer);
     }
 
     @Override
     public void removeObserver(IMonsterObserver observer) {
+        logger.debug("Removing observer {}", observer.toString());
         observerList.remove(observer);
     }
 
@@ -90,6 +98,7 @@ public class VampireMonster implements IMonster, Moveable {
     @Override
     public void affect(IMazeElement element) {
         if (element instanceof MazeRunner) {
+            logger.info("MazeRunner touched VampireMonster");
             MazeRunner runner = (MazeRunner) element;
             runner.setHealth(runner.getHealth() - 1);
 
@@ -108,6 +117,7 @@ public class VampireMonster implements IMonster, Moveable {
         Random rand = new Random();
         Direction dir = Direction.values()[rand.nextInt(4)];
         DirectionableMover.moveInDirection(this,dir);
+        logger.debug("VampireMonster {} moved to the {}", this.hashCode(), dir.toString());
     }
 
     @Override
@@ -131,6 +141,7 @@ public class VampireMonster implements IMonster, Moveable {
 
     @Override
     public void notifyMoveIn(Direction dir) {
+        logger.debug("Notifying observers that {} moved to the {}", this.hashCode(), dir.toString());
         Iterator<IMonsterObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().moveIn(dir);

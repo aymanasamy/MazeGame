@@ -3,8 +3,11 @@ package maze.mazeElements.walls;
 import maze.IMazeElement;
 import maze.Maze;
 import maze.mazeElements.bullets.IBullet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UnbreakableWall implements IWall {
+    private static final Logger logger = LogManager.getLogger(UnbreakableWall.class);
     private static int width = 1;
     private static int height = 1;
     private Maze maze;
@@ -48,6 +51,7 @@ public class UnbreakableWall implements IWall {
     public void affect(IMazeElement element) {
         if(element instanceof IBullet) {
             ((IBullet) element).destroy();
+            logger.debug("UnbreakableWall {} is affecting a bullet", this.hashCode());
         }
     }
 }

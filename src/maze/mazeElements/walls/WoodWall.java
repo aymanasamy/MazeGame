@@ -3,8 +3,11 @@ package maze.mazeElements.walls;
 import maze.IMazeElement;
 import maze.Maze;
 import maze.mazeElements.bullets.IBullet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class WoodWall implements IWall {
+    private static final Logger logger = LogManager.getLogger(WoodWall.class);
     private Maze maze;
     private static int width = 1;
     private static int height = 1;
@@ -54,7 +57,9 @@ public class WoodWall implements IWall {
 
     @Override
     public void affect(IMazeElement element) {
-        if(element instanceof IBullet)
+        if(element instanceof IBullet) {
             ((IBullet) element).destroy();
+            logger.debug("WoodWall {} is affecting a bullet", this.hashCode());
+        }
     }
 }
