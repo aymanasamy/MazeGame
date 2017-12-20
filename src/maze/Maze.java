@@ -4,6 +4,8 @@ import maze.helpingclasses.PointCompare;
 import maze.mazeElements.EmptyElement;
 import maze.mazeElements.mazeRunner.MazeRunner;
 import maze.mazeElements.monsters.IMonster;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -13,11 +15,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class Maze implements Serializable {
+    private static final Logger logger = LogManager.getLogger(Maze.class);
     private int width;
     private int height;
     private IMazeElement[][] map;
 
     public Maze(int width, int height) {
+        logger.debug("Constructing a {}x{} Maze object", width, height);
         this.width = width;
         this.height = height;
         map = new IMazeElement[width][height];
@@ -50,9 +54,12 @@ public class Maze implements Serializable {
     }
 
     public void removeElement(IMazeElement element) {
+        logger.debug("Removing element of type {} and dimensions {}x{} from maze",
+                element.getClass().getSimpleName(), element.getWidth(), element.getHeight());
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (element == map[i][j]) {
+                    logger.debug("Removing part of element at [{}][{}]", i, j);
                     map[i][j] = new EmptyElement();
                 }
             }
@@ -62,12 +69,15 @@ public class Maze implements Serializable {
     public boolean setElement(Point position, IMazeElement element) {
         if (elementIsNotInTheMaze(position, element))
             return false;
+        logger.debug("Adding a maze element at [{}][{}]", position.x, position.y);
         // Affect all elements in this place
+        logger.debug("Affecting elements in this place");
         ArrayList<IMazeElement> affectedElements = new ArrayList<>();
         for (int i = position.x; i < position.x + element.getWidth(); i++) {
             for (int j = position.y; j < position.y + element.getHeight(); j++) {
                 IMazeElement elementInPosition = map[i][j];
                 if(!affectedElements.contains(elementInPosition)) {
+                    logger.debug("Affecting element at [{}][{}]", i, j);
                     element.affect(elementInPosition);
                     elementInPosition.affect(element);
                     affectedElements.add(elementInPosition);
@@ -76,6 +86,7 @@ public class Maze implements Serializable {
         }
         if (!hasFreeSpace(position, element) || !element.exist())
             return false;
+        logger.debug("Element has enough free space. Placing in maze...");
         for (int i = position.x; i < position.x + element.getWidth(); i++) {
             for (int j = position.y; j < position.y + element.getHeight(); j++) {
                 map[i][j] = element;
