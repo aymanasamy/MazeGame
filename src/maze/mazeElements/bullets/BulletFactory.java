@@ -6,16 +6,17 @@ import maze.mazeElements.Direction;
 public class BulletFactory implements IBulletsFactory {
     private static BulletFactory ourInstance = new BulletFactory();
 
+    private BulletFactory() {
+    }
+
     public static BulletFactory getInstance() {
         return ourInstance;
     }
 
-    private BulletFactory() { }
-
     @Override
     public IBullet generate(Maze maze, int damage, Direction direction) {
         IBullet bullet;
-        if(damage == 1)
+        if (damage == 1)
             bullet = new GunBullet();
         else
             return null;
