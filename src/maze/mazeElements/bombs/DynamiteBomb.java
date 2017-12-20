@@ -1,7 +1,6 @@
 package maze.mazeElements.bombs;
 
 import maze.IMazeElement;
-import maze.Maze;
 import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.mazeRunner.MazeRunner;
 
@@ -20,7 +19,7 @@ public class DynamiteBomb extends IBomb {
             MazeRunner runner = (MazeRunner) element;
             runner.setHealth(0);
         }
-        if(element instanceof IBullet) {
+        if (element instanceof IBullet) {
             ((IBullet) element).destroy();
         }
     }

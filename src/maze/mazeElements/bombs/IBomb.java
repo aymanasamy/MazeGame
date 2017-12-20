@@ -2,8 +2,6 @@ package maze.mazeElements.bombs;
 
 import maze.IMazeElement;
 import maze.Maze;
-import maze.mazeElements.Moveable;
-import maze.mazeElements.mazeRunner.IMazeRunnerObserver;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,12 +16,14 @@ public abstract class IBomb implements IMazeElement {
     public IBomb() {
         observerList = new ArrayList<>();
     }
-    private void notifyDestroyed(){
+
+    private void notifyDestroyed() {
         Iterator<IBombObserver> iterator = observerList.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             iterator.next().destroy();
         }
     }
+
     @Override
     public int getWidth() {
         return width;
