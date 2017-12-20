@@ -10,7 +10,6 @@ import maze.mazeElements.bombs.DynamiteBomb;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.bombs.RandomBombFactory;
 import maze.mazeElements.gates.EndGate;
-import maze.mazeElements.gates.StartGate;
 import maze.mazeElements.gifts.AmmoGift;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.gifts.RandomGiftFactory;
@@ -18,7 +17,6 @@ import maze.mazeElements.mazeRunner.MazeRunner;
 import maze.mazeElements.monsters.IMonster;
 import maze.mazeElements.monsters.RandomMonsterFactory;
 import maze.mazeElements.monsters.VampireMonster;
-import maze.mazeElements.walls.IWall;
 import maze.mazeElements.walls.RandomWallFactory;
 import maze.mazeElements.walls.UnbreakableWall;
 import maze.mazeElements.walls.WoodWall;
@@ -52,8 +50,6 @@ public class EndlessMazeBuilderTester {
                     character = 'M';
                 if(element instanceof IGift)
                     character = 'G';
-                if(element instanceof StartGate)
-                    character = 'S';
                 if(element instanceof EndGate)
                     character = 'E';
                 if(element instanceof EmptyElement)

@@ -3,9 +3,9 @@ package maze;
 import java.io.Serializable;
 
 public interface IMazeElement extends Serializable {
-    public int getWidth();
+    int getWidth();
 
-    public int getHeight();
+    int getHeight();
 
     void setMaze(Maze maze);
 

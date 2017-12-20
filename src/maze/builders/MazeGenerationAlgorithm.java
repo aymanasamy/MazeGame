@@ -162,7 +162,6 @@ public class MazeGenerationAlgorithm {
 		myWay.push(temp);
 		planb.push(temp);
 		// System.out.println(temp);
-		// TODO Auto-generated method stub
 		return currentPosition;
 	}
 
@@ -188,7 +187,6 @@ public class MazeGenerationAlgorithm {
 		myWay.push(temp);
 		planb.push(temp);
 		// System.out.println(temp);
-		// TODO Auto-generated method stub
 		return currentPosition;
 	}
 
@@ -211,7 +209,6 @@ public class MazeGenerationAlgorithm {
 		temp.y = currentPosition.y;
 		myWay.push(temp);
 		planb.push(temp);
-		// TODO Auto-generated method stub
 		return currentPosition;
 	}
 
@@ -236,7 +233,6 @@ public class MazeGenerationAlgorithm {
 		planb.push(temp);
 		// System.out.println(temp);
 
-		// TODO Auto-generated method stub
 		return currentPosition;
 	}
 

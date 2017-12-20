@@ -3,13 +3,11 @@ package maze.builders;
 import java.awt.Point;
 import java.util.Stack;
 
-import maze.IMazeElement;
 import maze.Maze;
 import maze.mazeElements.bombs.IBombFactory;
 import maze.mazeElements.bombs.RandomBombFactory;
 import maze.mazeElements.gates.EndGate;
 import maze.mazeElements.gates.IGate;
-import maze.mazeElements.gates.StartGate;
 import maze.mazeElements.gifts.IGiftFactory;
 import maze.mazeElements.gifts.RandomGiftFactory;
 import maze.mazeElements.mazeRunner.MazeRunner;
@@ -49,8 +47,6 @@ public class EndlessMazeBuilder implements IMazeBuilder {
 					myEndlessMaze.setElement(myElementPosition, myMonister.generate(myEndlessMaze, 5));
 				}
 				if (theMaze[i][j] == 'S') {
-//					IGate mystart = new StartGate();
-//					myEndlessMaze.setElement(myElementPosition, mystart);
 					myEndlessMaze.setElement(myElementPosition, new MazeRunner());
 				}
 				if (theMaze[i][j] == 'E') {
@@ -70,10 +66,5 @@ public class EndlessMazeBuilder implements IMazeBuilder {
 		}
 
 		return myEndlessMaze;
-	}
-
-	@Override
-	public IMazeBuilder getInstance() {
-		return null;
 	}
 }
