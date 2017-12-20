@@ -11,7 +11,7 @@ public abstract class IBomb implements IMazeElement {
     protected int width = 1;
     protected int height = 1;
     protected Maze maze = null;
-    private List<IBombObserver> observerList;
+    protected List<IBombObserver> observerList;
     protected boolean exist = true;
 
     public IBomb() {

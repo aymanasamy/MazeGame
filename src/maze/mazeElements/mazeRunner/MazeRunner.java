@@ -12,6 +12,7 @@ import maze.mazeElements.bullets.IBulletsFactory;
 import maze.mazeElements.gifts.IGift;
 import maze.mazeElements.monsters.IMonster;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -157,13 +158,29 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
     public void fire() {
         if(bullets <= 0)
             return;
+        IBulletsFactory bulletsFactory = BulletFactory.getInstance();
+        IBullet bullet = bulletsFactory.generate(maze,bulletDamage,direction);
+        Point bulletPos = getBulletPos();
+        maze.setElement(bulletPos,bullet);
+        setBullets(getBullets()-1);
         Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().fire();
         }
-        IBulletsFactory bulletsFactory = BulletFactory.getInstance();
-        bulletsFactory.generate(maze,bulletDamage,direction);
-        setBullets(getBullets()-1);
+    }
+
+    private Point getBulletPos() {
+        Point bulletPos = new Point(maze.getPosition(this));
+        if(direction.equals(Direction.Right))
+            bulletPos.x++;
+        else if(direction.equals(Direction.Left))
+            bulletPos.x--;
+        else if(direction.equals(Direction.Down))
+            bulletPos.y--;
+        else if(direction.equals(Direction.Up))
+            bulletPos.y++;
+
+        return bulletPos;
     }
 
     public Maze getMaze() {

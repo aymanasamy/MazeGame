@@ -1,3 +1,4 @@
+/*
 package maze.testers;
 
 import maze.IMazeElement;
@@ -145,3 +146,4 @@ public class MazeTester {
         }
     }
 }
+*/

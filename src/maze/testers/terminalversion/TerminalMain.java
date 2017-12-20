@@ -1,4 +1,4 @@
-package maze.testers;
+package maze.testers.terminalversion;
 
 import maze.IMazeElement;
 import maze.Maze;
@@ -9,6 +9,7 @@ import maze.mazeElements.EmptyElement;
 import maze.mazeElements.bombs.DynamiteBomb;
 import maze.mazeElements.bombs.IBomb;
 import maze.mazeElements.bombs.RandomBombFactory;
+import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.gates.EndGate;
 import maze.mazeElements.gifts.AmmoGift;
 import maze.mazeElements.gifts.IGift;
@@ -22,9 +23,11 @@ import maze.mazeElements.walls.UnbreakableWall;
 import maze.mazeElements.walls.WoodWall;
 
 import java.awt.*;
+import java.util.Scanner;
 
-public class EndlessMazeBuilderTester {
+public class TerminalMain {
     private static Maze maze;
+    private static MazeRunner mazeRunner;
     public static void main(String[] args) {
 
         RandomBombFactory.getInstance().addBomb(DynamiteBomb.class);
@@ -34,11 +37,39 @@ public class EndlessMazeBuilderTester {
         RandomWallFactory.getInstance().addWall(WoodWall.class,true,1);
 
         IMazeBuilder mazeBuilder = new EndlessMazeBuilder();
-        maze = mazeBuilder.generate(5, Difficulty.Easy);
-        for(int i = 0;i < maze.getHeight();i++) {
+        maze = mazeBuilder.generate(2, Difficulty.Hard);
+        mazeRunner = maze.getMazeRunner();
+        refresh();
+        Player player = new Player();
+        mazeRunner.addObserver(player);
+        while (true){
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            if(input.equals("w")) {
+                mazeRunner.moveUp();
+            }
+            else if(input.equals("s")) {
+                mazeRunner.moveDown();
+            }
+            else if(input.equals("a")) {
+                mazeRunner.moveLeft();
+            }
+            else if(input.equals("d")) {
+                mazeRunner.moveRight();
+            }
+            else if(input.equals("f")) {
+                mazeRunner.fire();
+            }
+        }
+    }
+    public static void refresh(){
+        System.out.println("Health : "+mazeRunner.getHealth());;
+        System.out.println("Ammo : "+mazeRunner.getBullets());;
+        System.out.println("Lives : "+mazeRunner.getLives());;
+        for(int i = maze.getHeight()-1;i >= 0;i--) {
             for (int j = 0;j < maze.getWidth();j++) {
                 Character character = new Character('?');
-                IMazeElement element = maze.getElement(new Point(i,j));
+                IMazeElement element = maze.getElement(new Point(j,i));
                 if(element instanceof MazeRunner)
                     character = 'P';
                 if(element instanceof UnbreakableWall)
@@ -53,6 +84,8 @@ public class EndlessMazeBuilderTester {
                     character = 'G';
                 if(element instanceof EndGate)
                     character = 'E';
+                if(element instanceof IBullet)
+                    character = '.';
                 if(element instanceof EmptyElement)
                     character = ' ';
                 System.out.print(character);
@@ -61,5 +94,4 @@ public class EndlessMazeBuilderTester {
             System.out.println();
         }
     }
-
 }
