@@ -55,7 +55,7 @@ public class MazeGenerationAlgorithm {
 		temp2.y = CurrentPosition.y;
 		myWay.push(temp2);
 		planb.push(temp2);
-		// System.out.println(temp);
+
 		while (true) {
 
 			if (CurrentPosition.x == maze.length || CurrentPosition.y == maze.length) {
@@ -66,7 +66,7 @@ public class MazeGenerationAlgorithm {
 
 			if (checkAround(CurrentPosition)) {
 
-				// System.out.println("fuck"+CurrentPosition);
+
 
 				int checkoutIfThereExistUnvisitedCell = 0;
 				int w = 0;
@@ -74,7 +74,7 @@ public class MazeGenerationAlgorithm {
 				for (w = 0; w < visited.length; w++) {
 					for (z = 0; z < visited[0].length; z++) {
 						if (!visited[w][z]) {
-							// System.out.println(w+" "+z);
+
                             logger.debug("Not visited: [{}][{}]", w, z);
 							checkoutIfThereExistUnvisitedCell = 1;
 							break;
@@ -107,10 +107,10 @@ public class MazeGenerationAlgorithm {
 								}
 
 							}
-							// System.out.println(myWay.size()+"
-							// "+planb.size());
+							logger.debug("myWay.size(): {}", myWay.size());
+							logger.debug("planb.size(): {}", planb.size());
 							test1 = planb.pop();
-							// System.out.println(test1+"test");
+
 							if (!checkAround(test1)) {
 
 								Point test = new Point(0, 0);
@@ -118,7 +118,7 @@ public class MazeGenerationAlgorithm {
 								test.y = test1.y;
 								Point temp3 = new Point(test.x, test.y);
 								myWay.push(test1);
-								// System.out.println(test + "Sds");
+
 
 								CurrentPosition.x = test.x;
 								CurrentPosition.y = test.y;
@@ -132,7 +132,7 @@ public class MazeGenerationAlgorithm {
 
 						break;
 					}
-					// System.out.println(" ");
+
 				}
 
 				if (checkoutIfThereExistUnvisitedCell == 0) {
@@ -142,20 +142,16 @@ public class MazeGenerationAlgorithm {
 				PositionBeforeEdit = CurrentPosition;
 			}
 
-			/*
-			 * for (int h = 0; h < maze.length; h++) { for (int u = 0; u
-			 * <maze.length; u++) { System.out.print(maze[h][u]); }
-			 * System.out.println(" "); }
-			 * System.out.println("-------------------------------");
-			 */
+			logger.debug("Maze:{}{}", lineSeparator, mazeToString(maze));
 		}
 
 		int size = myWay.size();
-		/*
-		 * for (int i = 0; i < size; i++) { System.out.println(myWay.get(i));
-		 * 
-		 * }
-		 */
+		StringBuilder myWayStr = new StringBuilder();
+		 for (int i = 0; i < size; i++) { System.out.println(myWay.get(i));
+		  myWayStr.append(myWay.get(i));
+		 }
+		 logger.debug("myWay:{}{}", lineSeparator, myWayStr.toString());
+
 
 		return myWay;
 	}

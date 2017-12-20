@@ -31,7 +31,7 @@ public class Saver {
             oos.writeObject(currentState);
             oos.close();
         } catch (java.io.IOException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
     }
 
@@ -50,9 +50,9 @@ public class Saver {
                     loadedMaze = loadedState.getMaze();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e.toString());
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                logger.error(e.toString());
             }
         }
 
