@@ -27,11 +27,13 @@ public class VampireMonster implements IMonster, Moveable {
     private int health = getInitialHealth();
     private Maze maze;
     private List<IMonsterObserver> observerList;
+    private IMove iMove;
 
     public VampireMonster() {
         logger.debug("Created VampireMonster");
         observerList = new ArrayList<>();
         direction = Direction.Up; // Initial direction
+        iMove = new RandomMove();
     }
 
     public int getInitialHealth() {
@@ -114,8 +116,7 @@ public class VampireMonster implements IMonster, Moveable {
 
     @Override
     public void move() {
-        Random rand = new Random();
-        Direction dir = Direction.values()[rand.nextInt(4)];
+        Direction dir = iMove.move();
         DirectionableMover.moveInDirection(this,dir);
         logger.debug("VampireMonster {} moved to the {}", this.hashCode(), dir.toString());
     }
