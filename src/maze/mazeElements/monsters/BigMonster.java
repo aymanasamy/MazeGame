@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class BigMonster implements IMonster, Moveable {
+public class BigMonster implements IMonster {
 
     private static final Logger logger = LogManager.getLogger(BigMonster.class);
 
