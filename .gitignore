@@ -6,6 +6,13 @@
 .idea/**/tasks.xml
 .idea/dictionaries
 
+
+# Ayman
+.idea/misc.xml
+.idea/vcs.xml
+.idea/modules.xml
+
+
 # Sensitive or high-churn files:
 .idea/**/dataSources/
 .idea/**/dataSources.ids
