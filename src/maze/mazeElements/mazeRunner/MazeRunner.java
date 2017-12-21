@@ -181,6 +181,9 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
         Point bulletPos = getBulletPos();
         maze.setElement(bulletPos,bullet);
         setBullets(getBullets()-1);
+        while (bullet.exist()) {
+            bullet.move();
+        }
         Iterator<IMazeRunnerObserver> iterator = observerList.iterator();
         while (iterator.hasNext()){
             iterator.next().fire();

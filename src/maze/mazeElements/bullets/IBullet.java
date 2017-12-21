@@ -46,6 +46,7 @@ public abstract class IBullet implements IMazeElement, Moveable, Directionable {
     }
 
     public void destroy() {
+        exist = false;
         maze.removeElement(this);
     }
 
@@ -65,19 +66,19 @@ public abstract class IBullet implements IMazeElement, Moveable, Directionable {
         maze.removeElement(this);
         if (direction.equals(Direction.Right)) {
             logger.debug("Moving bullet one step to the right");
-            Point nextPosition = new Point(initialPosition.x + 1, initialPosition.y);
+            Point nextPosition = new Point(initialPosition.x , initialPosition.y +1);
             maze.setElement(nextPosition, this);
         } else if (direction.equals(Direction.Left)) {
             logger.debug("Moving bullet one step to the left");
-            Point nextPosition = new Point(initialPosition.x - 1, initialPosition.y);
+            Point nextPosition = new Point(initialPosition.x , initialPosition.y -1);
             maze.setElement(nextPosition, this);
         } else if (direction.equals(Direction.Up)) {
             logger.debug("Moving bullet one step up");
-            Point nextPosition = new Point(initialPosition.x, initialPosition.y + 1);
+            Point nextPosition = new Point(initialPosition.x-1,initialPosition.y + 1);
             maze.setElement(nextPosition, this);
         } else if (direction.equals(Direction.Down)) {
             logger.debug("Moving bullet one step down");
-            Point nextPosition = new Point(initialPosition.x, initialPosition.y - 1);
+            Point nextPosition = new Point(initialPosition.x+1,initialPosition.y - 1);
             maze.setElement(nextPosition, this);
         }
     }
