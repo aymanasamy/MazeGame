@@ -2,6 +2,7 @@ package maze.mazeElements.gifts;
 
 import maze.IMazeElement;
 import maze.Maze;
+import maze.ScoreHandler;
 import maze.mazeElements.bullets.IBullet;
 import maze.mazeElements.mazeRunner.MazeRunner;
 
@@ -12,6 +13,7 @@ public class AmmoGift implements IGift {
     private static final int width = 1;
     private static final int height = 1;
     private static final int additinalAmmo = 2;
+    private static final int GIFT_REWARD = 5;
     private Maze maze;
     private boolean exist = true;
 
@@ -39,6 +41,8 @@ public class AmmoGift implements IGift {
         if (element instanceof MazeRunner) {
             MazeRunner runner = (MazeRunner) element;
             runner.setBullets(runner.getBullets() + additinalAmmo);
+            ScoreHandler.addToScore(GIFT_REWARD);
+            ScoreHandler.incrementCollectedGifts();
         }
         if (element instanceof IBullet)
             ((IBullet) element).destroy();

@@ -2,6 +2,7 @@ package maze.mazeElements.mazeRunner;
 
 import maze.IMazeElement;
 import maze.Maze;
+import maze.ScoreHandler;
 import maze.mazeElements.Direction;
 import maze.mazeElements.Directionable;
 import maze.mazeElements.Healthable;
@@ -101,6 +102,8 @@ public class MazeRunner implements Healthable, Directionable, Serializable {
                 iterator.next().setLives(getLives());
             }
         }
+
+        ScoreHandler.setRemainingLives(this.lives);
     }
 
     public int getLives() {
