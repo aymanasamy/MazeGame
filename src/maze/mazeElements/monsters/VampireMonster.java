@@ -2,6 +2,7 @@ package maze.mazeElements.monsters;
 
 import maze.IMazeElement;
 import maze.Maze;
+import maze.ScoreHandler;
 import maze.mazeElements.Direction;
 import maze.mazeElements.DirectionableMover;
 import maze.mazeElements.Moveable;
@@ -22,6 +23,7 @@ public class VampireMonster implements IMonster {
     private static final int width = 1;
     private static final int height = 1;
     private static final int initialHealth = 1;
+    private static final int MONSTER_KILL_REWARD = 3;
 
     private Direction direction;
     private int health = getInitialHealth();
@@ -111,6 +113,8 @@ public class VampireMonster implements IMonster {
         }
         if(element instanceof IBullet) {
             ((IBullet) element).destroy();
+            ScoreHandler.addToScore(MONSTER_KILL_REWARD);
+            ScoreHandler.incrementKilledMonsters();
         }
     }
 
